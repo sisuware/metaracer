@@ -1,0 +1,9 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="container">
+  <form class="form">
+
+    <!-- Embed the schema editor on the form -->
+    <div fg-edit fg-schema="form.schema"></div>
+    <button type="submit" class="btn btn-primary" ng-class="{ disabled: form.$invalid }">Save</button>
+  </form>
+</div>
