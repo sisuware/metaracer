@@ -6,9 +6,13 @@ var mongoose = require('mongoose'),
 var FormSchema = new Schema({
   title: String,
   description: String,
-  hidden: Boolean,
+  published: Boolean,
   year: Date,
-  fields: Schema.Types.Mixed
+  fields: Schema.Types.Mixed,
+  _locked: {
+    type: Number,
+    ref: 'User'
+  }
 });
 
 module.exports = mongoose.model('Form', FormSchema);

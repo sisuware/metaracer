@@ -1,7 +1,12 @@
-@import 'bootstrap/less/bootstrap.less';
+html, body {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+}
+
+@import '/bower_components/bootstrap/dist/css/bootstrap.css';
 @import 'font-awesome/less/font-awesome.less';
 
-@icon-font-path: '/bower_components/bootstrap/fonts/';
+//@icon-font-path: '/bower_components/bootstrap/fonts/';
 @fa-font-path: '/bower_components/font-awesome/fonts';
 
 /**
@@ -18,7 +23,8 @@
 // injector
 @import 'account/login/login.less';
 @import 'admin/admin.less';
-@import 'form/form.less';
 @import 'main/main.less';
 @import 'organizations/organizations.less';
+@import 'sidebar/sidebar.less';
 // endinjector
+

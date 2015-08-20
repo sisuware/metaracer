@@ -1,0 +1,40 @@
+<div class="row clearfix bg-faded p-t m-b p-b">
+  <div class="col-sm-6">
+    <h5 class="m-a-0"><i class="fa fa-file-text-o"></i> Forms</h5>
+  </div>
+  <div class="col-sm-6 text-right">
+    <a href="/forms/new" class="btn btn-primary-outline btn-sm"><i class="fa fa-plus"></i> Form</a>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Published</th>
+        <th>Year</th>
+        <th>Last Updated</th>
+        <th class="text-right">
+        </th>
+      </tr>
+    </thead>
+    <tbody ng-cloak ng-show="forms.length">
+      <tr ng-repeat="form in forms">
+        <td>{{form.title}}</td>
+        <td>{{form.description}}</td>
+        <td>{{form.published}}</td>
+        <td>{{form.year}}</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr>
+        <td colspan="6">
+          <p class="help-block">No forms exist for your organization. <a href="/forms/new">Create a Form</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

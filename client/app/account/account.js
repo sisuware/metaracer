@@ -1,7 +1,13 @@
-'use strict';
+(function(){
+  'use strict';
 
-angular.module('metaracerApp')
-  .config(function ($stateProvider) {
+  angular
+    .module('metaracerApp')
+    .config(metaracerAppConfig);
+
+  metaracerAppConfig.$inject = ['$stateProvider'];
+
+  function metaracerAppConfig($stateProvider) {
     $stateProvider
       .state('login', {
         url: '/login',
@@ -19,4 +25,5 @@ angular.module('metaracerApp')
         controller: 'SettingsCtrl',
         authenticate: true
       });
-  });
+  }
+})();

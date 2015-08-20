@@ -4,7 +4,7 @@ angular.module('metaracerApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [
       {'title': 'Home', 'link': '/' },
-      {'title': 'Forms', 'link': '/form' }
+      {'title': 'Forms', 'link': '/forms' }
     ];
 
     $scope.isCollapsed = true;

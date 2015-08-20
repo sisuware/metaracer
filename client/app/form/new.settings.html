@@ -1,0 +1,29 @@
+<form>
+  <div class="row-fluid clearfix">
+    <div class="col-md-9">
+      <fieldset class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" ng-model="form.title" placeholder="Title" required>
+        <small class="text-muted">E.g. Membership Application</small>
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" ng-model="form.description" rows="3" placeholder="Description" required></textarea>
+        <small class="text-muted">A short description of the form</small>
+      </fieldset>
+    </div>
+    <div class="col-md-3">
+      <fieldset class="form-group">
+        <label class="c-input c-checkbox">
+          <input type="checkbox" ng-model="form.published" value="true">
+          <span class="c-indicator"></span>
+          Published
+        </label>
+      </fieldset>
+      <select class="c-select">
+        <option selected>Year</option>
+        <option value="2015">2015</option>
+        <option value="2016">2016</option>
+      </select>
+    </div>
+</form>

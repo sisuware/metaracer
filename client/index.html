@@ -14,6 +14,7 @@
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/angular-form-gen/dist/angular-form-gen.css" />
+      <link rel="stylesheet" href="bower_components/lato/css/lato.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -27,8 +28,11 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div ui-view=""></div>
+    <navbar></navbar>
+    <div class="row-fluid clearfix">
+      <sidebar></sidebar>
+      <div class="col-sm-12 col-md-10 col-md-offset-2 main" ui-view=""></div>
+    </div>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -60,9 +64,10 @@
           <script src="app/account/signup/signup.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
-          <script src="app/form/form-new.controller.js"></script>
-          <script src="app/form/form.controller.js"></script>
-          <script src="app/form/form.js"></script>
+          <script src="app/form/forms-index.controller.js"></script>
+          <script src="app/form/forms-new.controller.js"></script>
+          <script src="app/form/forms.resource.js"></script>
+          <script src="app/form/routes.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
           <script src="app/organizations/organizations.controller.js"></script>
@@ -71,6 +76,8 @@
           <script src="components/auth/user.service.js"></script>
           <script src="components/mongoose-error/mongoose-error.directive.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
+          <script src="components/navbar/navbar.directive.js"></script>
+          <script src="components/sidebar/sidebar.directive.js"></script>
           <script src="components/socket/socket.service.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->

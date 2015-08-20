@@ -1,0 +1,7 @@
+<div class="col-sm-12 col-md-2 sidebar bg-faded">
+  <ul class="nav nav-pills nav-stacked nav-sidebar">
+    <li class="nav-item" ng-repeat="item in menu">
+      <a class="nav-link" ng-href="{{item.link}}" ng-class="{'active':isActive(item.link)}">{{item.title}} <span ng-cloak ng-show="isActive(item.link)" class="sr-only">(current)</span></a>
+    </li>
+  </ul>
+</div>
