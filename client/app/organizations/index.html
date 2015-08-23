@@ -14,29 +14,32 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Published</th>
-            <th>Year</th>
-            <th>Last Updated</th>
+            <th>Name</th>
+            <th>Acronym</th>
+            <th>Subdomain</th>
+            <th>Owner</th>
+            <th>Members</th>
             <th class="text-right">
             </th>
           </tr>
         </thead>
-        <tbody ng-cloak ng-show="forms.length">
-          <tr ng-repeat="form in forms">
-            <td>{{form.title}}</td>
-            <td>{{form.description}}</td>
-            <td>{{form.published}}</td>
-            <td>{{form.year}}</td>
+        <tbody ng-cloak ng-show="organizations.length">
+          <tr ng-repeat="organization in organizations">
+            <td><a ng-href="/organizations/{{organization._id}}">{{organization.name}}</a></td>
+            <td>{{organization.acronym}}</td>
+            <td><a ng-href="https://{{organization.subdomain}}.metaracer.com" target="_blank">{{organization.subdomain}}</a></td>
+            <td>{{organization._owner.email}}</td>
             <td></td>
-            <td></td>
+            <td class="text-right">
+              <button class="btn btn-secondary-outline btn-sm" ng-click="organization.$delete()"><i class="fa fa-trash-o"></i></button>
+              <a class="btn btn-primary-outline btn-sm" ng-href="/organizations/{{organization._id}}"><i class="fa fa-pencil"></i></button>
+            </td>
           </tr>
         </tbody>
-        <tbody>
+        <tbody ng-cloak ng-hide="organizations.length">
           <tr>
             <td colspan="6">
-              <p class="help-block">No forms exist for your organization. <a href="/forms/new/settings">Create a Form</a></p>
+              <p class="help-block">You do not belong to any organizations. <a href="/organizations/new">Create a Organization</a></p>
             </td>
           </tr>
         </tbody>

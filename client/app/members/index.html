@@ -1,0 +1,45 @@
+<navbar></navbar>
+<div class="row-fluid clearfix">
+  <sidebar menu="organization"></sidebar>
+  <div class="col-sm-12 col-md-10 col-md-offset-2 main">
+    <div class="row clearfix bg-faded p-t m-b p-b">
+      <div class="col-sm-4">
+        <h5 class="m-a-0">{{organization.acronym}} Members</h5>
+      </div>
+      <div class="col-sm-4 text-right">
+        <!-- <a href="/organizations/new" class="btn btn-primary-outline btn-sm"><i class="fa fa-plus"></i> Organization</a> -->
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody ng-cloak ng-show="members.length">
+          <tr ng-repeat="member in members">
+            <td>{{member._user.firstName}}</td>
+            <td>{{member._user.lastName}}</td>
+            <td>{{member._user.email}}</td>
+            <td>{{member.role}}</td>
+            <td class="text-right">
+              <button class="btn btn-secondary-outline btn-sm" ng-click="member.$delete()"><i class="fa fa-trash-o"></i></button>
+            </td>
+          </tr>
+        </tbody>
+        <tbody ng-cloak ng-hide="members.length">
+          <tr>
+            <td colspan="6">
+              <p class="help-block">No members exist for your organization</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

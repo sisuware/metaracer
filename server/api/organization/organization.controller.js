@@ -5,10 +5,13 @@ var Organization = require('./organization.model');
 
 // Get list of organizations
 exports.index = function(req, res) {
-  Organization.find(function (err, organizations) {
-    if(err) { return handleError(res, err); }
-    return res.status(200).json(organizations);
-  });
+  Organization
+    .find()
+    .populate('_owner', 'email')
+    .exec(function (err, organizations) {
+      if(err) { return handleError(res, err); }
+      return res.status(200).json(organizations);
+    });
 };
 
 // Get a single organization

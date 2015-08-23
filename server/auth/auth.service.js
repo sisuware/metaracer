@@ -7,6 +7,7 @@ var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
 var compose = require('composable-middleware');
 var User = require('../api/user/user.model');
+var Organization = require('../api/organization/organization.model');
 var validateJwt = expressJwt({ secret: config.secrets.session });
 
 /**
@@ -53,8 +54,17 @@ function hasRole(roleRequired) {
     });
 }
 
-function orgAdmin() {
-  
+function isOrganizationOwner() {
+  return compose()
+    .use(isAuthenticated())
+    .use(function meetsRequirements(req, res, next) {
+      Organization.findById(req.params.id, function(err, organization){
+        if (parseInt(organization._owner) !== parseInt(req.user._id)) {
+          return res.status(403).send('Forbidden');
+        }
+        next();
+      });
+    });
 }
 
 /**
@@ -77,4 +87,5 @@ function setTokenCookie(req, res) {
 exports.isAuthenticated = isAuthenticated;
 exports.hasRole = hasRole;
 exports.signToken = signToken;
+exports.isOrganizationOwner = isOrganizationOwner;
 exports.setTokenCookie = setTokenCookie;

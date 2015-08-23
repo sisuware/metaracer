@@ -11,6 +11,7 @@
     newOrganizationResolve.$inject = ['Organizations'];
     userResolve.$inject = ['Auth'];
     organizationResolve.$inject = ['Organizations', '$stateParams'];
+    membersResolve.$inject = ['Members', '$stateParams'];
 
     function newOrganizationResolve(Organizations) {
       return new Organizations();
@@ -22,6 +23,10 @@
 
     function organizationResolve(Organizations, $stateParams) {
       return Organizations.get({'id': $stateParams.id});
+    }
+
+    function membersResolve(Members, $stateParams) {
+      return Members.query()
     }
 
     $stateProvider
@@ -47,6 +52,25 @@
         authenticate: true,
         resolve: {
           organization: organizationResolve
+        }
+      })
+      .state('organizationForms', {
+        url: '/organizations/:id/forms',
+        templateUrl: 'app/organizations/show.html',
+        controller: 'OrganizationsShowController',
+        authenticate: true,
+        resolve: {
+          organization: organizationResolve
+        }
+      })
+      .state('organizationMembers', {
+        url: '/organizations/:id/members',
+        templateUrl: 'app/members/index.html',
+        controller: 'MembersIndexController',
+        authenticate: true,
+        resolve: {
+          organization: organizationResolve,
+          members: membersResolve
         }
       });
   }

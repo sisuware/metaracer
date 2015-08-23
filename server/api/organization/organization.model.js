@@ -1,7 +1,8 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var Member = require('../member/member.model');
 
 var OrganizationSchema = new Schema({
   name: String,
@@ -27,7 +28,7 @@ var OrganizationSchema = new Schema({
     return name.length;
   }, 'Name cannot be blank');
 
-  // Validate empty name
+  // Validate empty acronym
  OrganizationSchema
   .path('acronym')
   .validate(function(acronym) {
@@ -52,5 +53,33 @@ OrganizationSchema
       next();
     }
   });
+
+/** 
+ * Post-save hook
+ */
+OrganizationSchema
+  .post('save', function(organization) {
+    debugger;
+
+    Member.create({
+      '_organization': organization._id,
+      '_user': organization._owner,
+      'role': 'admin'
+    }, function(err, member){
+      console.log(err, member);
+    });
+  });
+
+/** 
+ * Post-remove hook
+ */
+// OrganizationSchema
+//   .post('remove', function(organization) {
+
+//     Member.find({'_organization': organization._id}, function(members){
+//       console.log(members);
+//     });
+//   });
+
 
 module.exports = mongoose.model('Organization', OrganizationSchema);
