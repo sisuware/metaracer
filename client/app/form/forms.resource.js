@@ -11,7 +11,7 @@
     var url = '/api/forms/:id';
 
     return $resource(url, {
-      id: '@id'
+      id: '@_id'
     });
   }
 

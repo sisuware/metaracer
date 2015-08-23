@@ -42,6 +42,6 @@
         templateUrl: 'app/form/new.fields.html',
         controller: 'FormsNewController',
         authenticate: true
-      })
+      });
   }
 })();

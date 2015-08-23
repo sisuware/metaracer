@@ -1,23 +1,16 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1>Login</h1>
-      <p>Accounts are reset on server restart from <code>server/config/seed.js</code>. Default account is <code>test@test.com</code> / <code>test</code></p>
-      <p>Admin account is <code>admin@admin.com</code> / <code>admin</code></p>
-    </div>
-    <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="login(form)" novalidate>
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
+    <h1 class="m-t-lg text-center">Metaracer</h1>
+    <div class="m-t-lg">
+      <div class="card-block">
+        <form class="form" name="form" ng-submit="login(form)" novalidate>
 
-        <div class="form-group">
-          <label>Email</label>
-
-          <input type="email" name="email" class="form-control" ng-model="user.email" required>
+        <div class="form-group" ng-class="{'has-error':form.email.$error.email, 'has-success':form.email.$valid, 'has-warning':form.email.$invalid}">
+          <input type="email" name="email" class="form-control" ng-model="user.email" required placeholder="Email">
         </div>
 
-        <div class="form-group">
-          <label>Password</label>
-
-          <input type="password" name="password" class="form-control" ng-model="user.password" required>
+        <div class="form-group" ng-class="{'has-error':form.password.$error.password, 'has-success':form.password.$valid, 'has-warning':form.password.$invalid}">
+          <input type="password" name="password" class="form-control" ng-model="user.password" required placeholder="Password">
         </div>
 
         <div class="form-group has-error">
@@ -31,23 +24,22 @@
           <p class="help-block">{{ errors.other }}</p>
         </div>
 
-        <div>
-          <button class="btn btn-inverse btn-lg btn-login" type="submit">
-            Login
-          </button>
-          <a class="btn btn-default btn-lg btn-register" href="/signup">
-            Register
-          </a>
+        <div class="row clearfix">
+          <div class="col-sm-6 m-b">
+            <a class="btn btn-primary-outline btn-block" href="/signup">Signup</a>
+          </div>
+          <div class="col-sm-6">
+            <button class="btn btn-primary btn-block" type="submit">Login</button>
+          </div>
         </div>
-
         <hr>
         <div>
-          <a class="btn btn-google-plus" href="" ng-click="loginOauth('google')">
+          <a class="btn btn-info-outline" href="" ng-click="loginOauth('google')">
             <i class="fa fa-google-plus"></i> Connect with Google+
           </a>
         </div>
       </form>
+      </div>
     </div>
   </div>
-  <hr>
 </div>

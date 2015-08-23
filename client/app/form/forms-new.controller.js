@@ -9,7 +9,7 @@
 
   function FormsNewController($scope, form, $state) {
     $scope.form = form;
-    $scope.transitionTo = $state.transitionTo
+    $scope.transitionTo = $state.transitionTo;
     $scope.save = save;
 
     function save() {

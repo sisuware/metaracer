@@ -33,6 +33,11 @@ function metaracerAppRun($rootScope, $location, Auth) {
         event.preventDefault();
         $location.path('/login');
       }
+
+      if (next.requiredRole && loggedIn && next.requiredRole !== loggedIn.role) {
+        event.preventDefault();
+        $location.path('/');
+      }
     });
   });
 }

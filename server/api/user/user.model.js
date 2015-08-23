@@ -6,7 +6,8 @@ var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new Schema({
-  name: String,
+  firstName: String,
+  lastName: String,
   email: { type: String, lowercase: true },
   role: {
     type: String,
@@ -38,7 +39,7 @@ UserSchema
   .virtual('profile')
   .get(function() {
     return {
-      'name': this.name,
+      'name': [this.firstName, this.lastName].join(' '),
       'role': this.role
     };
   });
@@ -56,6 +57,22 @@ UserSchema
 /**
  * Validations
  */
+
+// Validate empty first name
+ UserSchema
+  .path('firstName')
+  .validate(function(firstName) {
+    if (authTypes.indexOf(this.provider) !== -1) return true;
+    return firstName.length;
+  }, 'First name cannot be blank');
+
+  // Validate empty last name
+ UserSchema
+  .path('lastName')
+  .validate(function(lastName) {
+    if (authTypes.indexOf(this.provider) !== -1) return true;
+    return lastName.length;
+  }, 'First name cannot be blank');
 
 // Validate empty email
 UserSchema

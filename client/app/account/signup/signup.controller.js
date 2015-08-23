@@ -10,7 +10,8 @@ angular.module('metaracerApp')
 
       if(form.$valid) {
         Auth.createUser({
-          name: $scope.user.name,
+          firstName: $scope.user.firstName,
+          lastName: $scope.user.lastName,
           email: $scope.user.email,
           password: $scope.user.password
         })
@@ -24,7 +25,9 @@ angular.module('metaracerApp')
 
           // Update validity of form fields that match the mongoose errors
           angular.forEach(err.errors, function(error, field) {
-            form[field].$setValidity('mongoose', false);
+            if (form && form[field]) {
+              form[field].$setValidity('mongoose', false);
+            }
             $scope.errors[field] = error.message;
           });
         });
