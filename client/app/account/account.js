@@ -9,12 +9,15 @@
 
   function metaracerAppConfig($stateProvider) {
     $stateProvider
-      .state('login', {
+      .state('auth', {
+        templateUrl: 'app/account/auth.layout.html'
+      })
+      .state('auth.login', {
         url: '/login',
         templateUrl: 'app/account/login/login.html',
         controller: 'LoginCtrl'
       })
-      .state('signup', {
+      .state('auth.signup', {
         url: '/signup',
         templateUrl: 'app/account/signup/signup.html',
         controller: 'SignupCtrl'

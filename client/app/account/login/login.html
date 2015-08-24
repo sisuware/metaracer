@@ -1,45 +1,31 @@
-<div class="row">
-  <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4">
-    <h1 class="m-t-lg text-center">Metaracer</h1>
-    <div class="m-t-lg">
-      <div class="card-block">
-        <form class="form" name="form" ng-submit="login(form)" novalidate>
-
-        <div class="form-group" ng-class="{'has-error':form.email.$error.email, 'has-success':form.email.$valid, 'has-warning':form.email.$invalid}">
-          <input type="email" name="email" class="form-control" ng-model="user.email" required placeholder="Email">
-        </div>
-
-        <div class="form-group" ng-class="{'has-error':form.password.$error.password, 'has-success':form.password.$valid, 'has-warning':form.password.$invalid}">
-          <input type="password" name="password" class="form-control" ng-model="user.password" required placeholder="Password">
-        </div>
-
-        <div class="form-group has-error">
-          <p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && submitted">
-             Please enter your email and password.
-          </p>
-          <p class="help-block" ng-show="form.email.$error.email && submitted">
-             Please enter a valid email.
-          </p>
-
-          <p class="help-block">{{ errors.other }}</p>
-        </div>
-
-        <div class="row clearfix">
-          <div class="col-sm-6 m-b">
-            <a class="btn btn-primary-outline btn-block" href="/signup">Signup</a>
-          </div>
-          <div class="col-sm-6">
-            <button class="btn btn-primary btn-block" type="submit">Login</button>
-          </div>
-        </div>
-        <hr>
-        <div>
-          <a class="btn btn-info-outline" href="" ng-click="loginOauth('google')">
-            <i class="fa fa-google-plus"></i> Connect with Google+
-          </a>
-        </div>
-      </form>
-      </div>
+<form class="form" name="form" ng-submit="login(form)" novalidate>
+  <div class="form-group" ng-class="{'has-error':form.email.$error.email, 'has-success':form.email.$valid, 'has-warning':form.email.$invalid}">
+    <input type="email" name="email" class="form-control" ng-model="user.email" required placeholder="Email">
+  </div>
+  <div class="form-group" ng-class="{'has-error':form.password.$error.password, 'has-success':form.password.$valid, 'has-warning':form.password.$invalid}">
+    <input type="password" name="password" class="form-control" ng-model="user.password" required placeholder="Password">
+  </div>
+  <div class="form-group has-error">
+    <p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && submitted">
+       Please enter your email and password.
+    </p>
+    <p class="help-block" ng-show="form.email.$error.email && submitted">
+       Please enter a valid email.
+    </p>
+    <p class="help-block">{{ errors.other }}</p>
+  </div>
+  <div class="row clearfix">
+    <div class="col-sm-6 m-b">
+      <a class="btn btn-primary-outline btn-block" href="/signup">Signup</a>
+    </div>
+    <div class="col-sm-6">
+      <button class="btn btn-primary btn-block" type="submit">Login</button>
     </div>
   </div>
-</div>
+  <hr>
+  <div>
+    <a class="btn btn-info-outline" href="" ng-click="loginOauth('google')">
+      <i class="fa fa-google-plus"></i> Connect with Google+
+    </a>
+  </div>
+</form>
