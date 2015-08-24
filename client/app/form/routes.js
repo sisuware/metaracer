@@ -21,7 +21,7 @@
     }
 
     function formsResolve(Forms, $stateParams) {
-      return Forms.query({organization: $stateParams.id});
+      return Forms.query({'_organization': $stateParams.id});
     }
 
     $stateProvider
