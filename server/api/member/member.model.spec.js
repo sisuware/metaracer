@@ -13,7 +13,8 @@ var organization = new Organization({
 
 var user = new User({
   provider: 'local',
-  name: 'Fake User',
+  firstName: 'Fake',
+  lastName: 'User',
   email: 'test@test.com',
   password: 'password'
 });
@@ -24,15 +25,19 @@ describe('Member Model', function() {
   before(function(done) {
     // Clear users before testing
     Member.remove().exec().then(function() {
-      organization.save(function(err, organization){
-        member._organization = organization.id;
+      Organization.remove().exec().then(function(){
+        organization.save(function(err, organization){
+          member._organization = organization.id;
+        });
       });
 
-      user.save(function(err, user){
-        member._user = user.id;
-        member.role = 'user';
-
-        done();
+      User.remove().exec().then(function() {
+        user.save(function(err, user){
+          member._user = user.id;
+          member.role = 'user';
+  
+          done();
+        });
       });  
     });
   });

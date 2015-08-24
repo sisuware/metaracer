@@ -122,6 +122,14 @@ UserSchema
       next();
   });
 
+
+/**
+ * Post-save hook
+ */
+UserSchema
+  .post('save', function(user) {
+    // todo: send welcome/verification email.
+  });
 /**
  * Methods
  */
