@@ -5,11 +5,23 @@ var Schema = mongoose.Schema;
 var Member = require('../member/member.model');
 
 var OrganizationSchema = new Schema({
-  name: String,
-  acronym: String,
+  name: {
+    type: String,
+    required: true
+  },
+  acronym: {
+    type: String,
+    required: true,
+    index: {
+      unique: true
+    }
+  },
   subdomain: {
     type: String,
-    index: true
+    index: {
+      uniue: true
+    },
+    lowercase: true,
   },
   _owner: {
     type: Schema.Types.ObjectId,
@@ -22,18 +34,46 @@ var OrganizationSchema = new Schema({
  */
 
 // Validate empty name
- OrganizationSchema
+OrganizationSchema
   .path('name')
   .validate(function(name) {
     return name.length;
   }, 'Name cannot be blank');
 
   // Validate empty acronym
- OrganizationSchema
+OrganizationSchema
   .path('acronym')
   .validate(function(acronym) {
     return acronym.length;
   }, 'Acronym cannot be blank');
+
+OrganizationSchema
+  .path('_owner')
+  .validate(function(owner) {
+    return String(owner).length;
+  }, 'Owner cannot be blank');
+
+OrganizationSchema
+  .path('subdomain')
+  .validate(function(subdomain) {
+    return subdomain.length;
+  }, 'Subdomain cannot be blank');
+
+OrganizationSchema
+  .path('acronym')
+  .validate(function(value, respond) {
+    var self = this;
+
+    this.constructor.findOne({acronym: value}, function(err, organization) {
+
+      if (err) throw err;
+      if (organization) {
+        if (self.id === organization.id) return respond(true);
+        return respond(false);
+      }
+      respond(true);
+    });
+  }, 'Organization acronym already exists.');
 
 var validatePresenceOf = function(value) {
   return value && value.length;
@@ -59,15 +99,14 @@ OrganizationSchema
  */
 OrganizationSchema
   .post('save', function(organization) {
-    debugger;
 
-    Member.create({
-      '_organization': organization._id,
-      '_user': organization._owner,
-      'role': 'admin'
-    }, function(err, member){
-      console.log(err, member);
-    });
+    // Member.create({
+    //   '_organization': organization._id,
+    //   '_user': organization._owner,
+    //   'role': 'admin'
+    // }, function(err, member){
+    //   //console.log(err, member);
+    // });
   });
 
 /** 

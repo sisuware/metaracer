@@ -9,8 +9,12 @@ var FormSchema = new Schema({
   published: Boolean,
   year: Date,
   fields: Schema.Types.Mixed,
+  _organization: {
+    type: Schema.Types.ObjectId,
+    ref: 'Organization'
+  },
   _locked: {
-    type: Number,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   }
 });

@@ -1,13 +1,13 @@
 <navbar></navbar>
 <div class="row-fluid clearfix">
-  <sidebar></sidebar>
+  <sidebar menu="organization"></sidebar>
   <div class="col-sm-12 col-md-10 col-md-offset-2 main">
     <div class="row clearfix bg-faded p-t m-b p-b">
       <div class="col-sm-6">
-        <h5 class="m-a-0"><i class="fa fa-file-text-o"></i> Forms</h5>
+        <h5 class="m-a-0">{{organization.acronym}} Forms</h5>
       </div>
       <div class="col-sm-6 text-right">
-        <a href="/forms/new/settings" class="btn btn-primary-outline btn-sm"><i class="fa fa-plus"></i> Form</a>
+        <a ng-href="/organizations/{{organization._id}}/forms/new/settings" class="btn btn-primary-outline btn-sm"><i class="fa fa-plus"></i> Form</a>
       </div>
     </div>
     <div class="table-responsive">
@@ -33,10 +33,10 @@
             <td></td>
           </tr>
         </tbody>
-        <tbody>
+        <tbody ng-cloak ng-hide="forms.length">
           <tr>
             <td colspan="6">
-              <p class="help-block">No forms exist for your organization. <a href="/forms/new/settings">Create a Form</a></p>
+              <p class="help-block">No forms exist yet for your organization. <a ng-href="/organizations/{{organization._id}}/forms/new/settings">Create a Form</a></p>
             </td>
           </tr>
         </tbody>

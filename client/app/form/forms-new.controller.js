@@ -5,12 +5,20 @@
     .module('metaracerApp')
     .controller('FormsNewController', FormsNewController);
 
-  FormsNewController.$inject = ['$scope','form','$state'];
+  FormsNewController.$inject = ['$scope','form','$state','organization'];
 
-  function FormsNewController($scope, form, $state) {
+  function FormsNewController($scope, form, $state, organization) {
+    $scope.organization = organization;
     $scope.form = form;
-    $scope.transitionTo = $state.transitionTo;
+    $scope.transitionTo = transitionTo;
     $scope.save = save;
+
+    $scope.form._organization = organization._id;
+
+    function transitionTo(state) {
+      $state.transitionTo(state, {'id': organization._id});
+    }
+    
 
     function save() {
       _reset();

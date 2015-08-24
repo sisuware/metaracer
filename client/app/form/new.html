@@ -1,10 +1,10 @@
 <navbar></navbar>
 <div class="row-fluid clearfix">
-  <sidebar></sidebar>
-  <div class="col-sm-12 col-md-10 col-md-offset-2 main">
-    <div class="row clearfix bg-faded p-t m-b p-b">
+  <!-- <sidebar></sidebar> -->
+  <div class="col-sm-12 main">
+    <div class="row clearfix bg-primary p-t m-b p-b">
       <div class="col-sm-6">
-        <h5 class="m-a-0"><i class="fa fa-plus"></i> Form</h5>
+        <h5 class="m-a-0">Create a Form</h5>
       </div>
       <div class="col-sm-6 text-right">
         <a ng-click="save()" class="btn btn-primary-outline btn-sm">Save</a>
@@ -20,7 +20,6 @@
         </li>
       </ul>
     </div>
-    {{form}}
     <div class="m-t-md" ui-view></div>
   </div>
 </div>

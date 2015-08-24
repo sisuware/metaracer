@@ -53,25 +53,6 @@
         resolve: {
           organization: organizationResolve
         }
-      })
-      .state('organizationForms', {
-        url: '/organizations/:id/forms',
-        templateUrl: 'app/organizations/show.html',
-        controller: 'OrganizationsShowController',
-        authenticate: true,
-        resolve: {
-          organization: organizationResolve
-        }
-      })
-      .state('organizationMembers', {
-        url: '/organizations/:id/members',
-        templateUrl: 'app/members/index.html',
-        controller: 'MembersIndexController',
-        authenticate: true,
-        resolve: {
-          organization: organizationResolve,
-          members: membersResolve
-        }
       });
   }
 })();
