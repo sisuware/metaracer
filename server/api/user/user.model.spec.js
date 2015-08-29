@@ -4,18 +4,19 @@ var should = require('should');
 var app = require('../../app');
 var User = require('./user.model');
 
-var user = new User({
-  provider: 'local',
-  firstName: 'Fake',
-  lastName: 'User',
-  email: 'test@test.com',
-  password: 'password'
-});
+var user;
 
 describe('User Model', function() {
-  before(function(done) {
+  beforeEach(function(done) {
     // Clear users before testing
     User.remove().exec().then(function() {
+      user = new User({
+        provider: 'local',
+        firstName: 'Fake',
+        lastName: 'User',
+        email: 'test@test.com',
+        password: 'password'
+      });
       done();
     });
   });
@@ -64,6 +65,14 @@ describe('User Model', function() {
     user.lastName = '';
     user.save(function(err) {
       should.exist(err.errors.lastName);
+      done();
+    });
+  });
+
+  it('should force verifiedEmail to be false when saving', function(done) {
+    user.verifiedEmail = true;
+    user.save(function(err) {
+      user.verifiedEmail.should.not.be.true;
       done();
     });
   });

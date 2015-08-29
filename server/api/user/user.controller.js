@@ -5,9 +5,20 @@ var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 
-var validationError = function(res, err) {
+function validationError(res, err) {
   return res.status(422).json(err);
-};
+}
+
+function extractSubdomain(req) {
+  var host = req.headers.host;
+  var subdomain = host.split('.');
+  if (subdomain && subdomain.length === 2) {
+    return subdomain[0];
+  } else {
+    return false;
+  }
+}
+
 
 /**
  * Get list of users
@@ -22,13 +33,33 @@ exports.index = function(req, res) {
 
 /**
  * Creates a new user
+ * If user signed up at a subdomain, create the org membership.
  */
 exports.create = function (req, res, next) {
   var newUser = new User(req.body);
+  var subdomain = extractSubdomain(req);
+
   newUser.provider = 'local';
   newUser.role = 'user';
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
+
+    if (subdomain) {
+      User
+        .model('Organization')
+        .findOne({'subdomain': req.params.id}, function (err, organization) {
+          if(err || !organization) { console.log(err, organization); return false; }
+
+          User.model('Member').create({
+            _organization: organization.id,
+            _user: user.id,
+            role: 'user'
+          }, function(err, member){
+            if (err) { console.log(err); }
+          });
+        });
+    }
+
     var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
     res.json({ token: token });
   });

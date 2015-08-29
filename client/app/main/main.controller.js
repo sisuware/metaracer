@@ -1,27 +1,15 @@
-'use strict';
+(function(){
+  'use strict';
 
-angular.module('metaracerApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
-    // $scope.awesomeThings = [];
+  angular
+    .module('metaracerApp')
+    .controller('MainController', MainController);
 
-    // $http.get('/api/things').success(function(awesomeThings) {
-    //   $scope.awesomeThings = awesomeThings;
-    //   socket.syncUpdates('thing', $scope.awesomeThings);
-    // });
+  MainController.$inject = ['$scope','$state'];
 
-    // $scope.addThing = function() {
-    //   if($scope.newThing === '') {
-    //     return;
-    //   }
-    //   $http.post('/api/things', { name: $scope.newThing });
-    //   $scope.newThing = '';
-    // };
-
-    // $scope.deleteThing = function(thing) {
-    //   $http.delete('/api/things/' + thing._id);
-    // };
-
-    // $scope.$on('$destroy', function () {
-    //   socket.unsyncUpdates('thing');
-    // });
-  });
+  function MainController($scope, $state) {
+    if ($scope.organization) {
+      $state.go('main.auth');
+    }    
+  }
+})();

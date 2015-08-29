@@ -12,6 +12,12 @@
 
     return $resource(url, {
       id: '@_id'
+    }, {
+      subdomain: {
+        url: '/api/organizations/subdomain/:id',
+        method: 'GET'
+
+      }
     });
   }
 

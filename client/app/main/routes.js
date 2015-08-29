@@ -12,7 +12,11 @@
       .state('main', {
         url: '/',
         templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainController'
+      })
+      .state('main.auth', {
+        templateUrl: 'app/main/main.auth.html'
+        //controller: 'MainController'
       });
   }
 })();

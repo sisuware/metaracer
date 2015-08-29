@@ -2,7 +2,6 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var Member = require('../member/member.model');
 
 var OrganizationSchema = new Schema({
   name: {
@@ -28,6 +27,20 @@ var OrganizationSchema = new Schema({
     ref: 'User'
   }
 });
+
+function validatePresenceOf(value) {
+  return value && value.length;
+}
+
+function handleError(err){
+  if (err) {
+    new Error(err);
+  }
+}
+
+function handleCallback(err, data) {
+  handleError(err);
+}
 
 /**
  * Validations
@@ -75,10 +88,6 @@ OrganizationSchema
     });
   }, 'Organization acronym already exists.');
 
-var validatePresenceOf = function(value) {
-  return value && value.length;
-};
-
 /**
  * Pre-save hook
  */
@@ -100,25 +109,45 @@ OrganizationSchema
 OrganizationSchema
   .post('save', function(organization) {
 
-    // Member.create({
-    //   '_organization': organization._id,
-    //   '_user': organization._owner,
-    //   'role': 'admin'
-    // }, function(err, member){
-    //   //console.log(err, member);
-    // });
+    this
+      .model('Member')
+      .create({
+        '_organization': organization.id,
+        '_user': organization._owner,
+        'role': 'admin'
+      }, handleCallback);
   });
 
 /** 
- * Post-remove hook
+ * Pre-remove hook
  */
-// OrganizationSchema
-//   .post('remove', function(organization) {
+OrganizationSchema
+  .pre('remove', function(next) {
+    var self = this;
+    
+    this
+      .model('Member')
+      .find({
+        '_organization': self.id
+      })
+      .remove(function(err){
+        next(handleError(err));
+      });
+  });
 
-//     Member.find({'_organization': organization._id}, function(members){
-//       console.log(members);
-//     });
-//   });
+OrganizationSchema
+  .pre('remove', function(next) {
+    var self = this;
+    
+    this
+      .model('Form')
+      .find({
+        '_organization': self.id
+      })
+      .remove(function(err){
+        next(handleError(err));
+      });
+  });
 
 
 module.exports = mongoose.model('Organization', OrganizationSchema);

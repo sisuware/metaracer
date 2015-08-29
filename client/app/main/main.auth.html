@@ -1,0 +1,21 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container text-center">
+    <h1 class="display-1">Login to {{organization.acronym}}</h1>
+    <p class="lead">{{organization.name}}</p>
+  </div>
+</div>
+<div class="col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 text-center">
+  <div class="m-b-lg">
+    <div class="card-block">
+      <h4 class="m-b-md">Already a member</h4>
+      <a ui-sref="auth.login" class="btn btn-primary-outline btn-block btn-lg">Login</a>
+    </div>
+  </div>
+  <hr/>
+  <div class="m-t-lg">
+    <div class="card-block">
+      <h4 class="m-b-md">New to {{organization.acronym}}?</h4>
+      <a ui-sref="auth.signup" class="btn btn-primary-outline btn-block btn-lg">Sign up</a>
+    </div>
+  </div>
+</div>

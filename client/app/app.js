@@ -16,7 +16,7 @@ angular
   .run(metaracerAppRun);
 
 metaracerAppConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
-metaracerAppRun.$inject = ['$rootScope', '$location', 'Auth'];
+metaracerAppRun.$inject = ['$rootScope', '$location', 'Auth', '$state'];
 authInterceptor.$inject = ['$q', '$cookieStore', '$location'];
 
 function metaracerAppConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
@@ -25,18 +25,18 @@ function metaracerAppConfig($stateProvider, $urlRouterProvider, $locationProvide
   $httpProvider.interceptors.push('authInterceptor');
 }
   
-function metaracerAppRun($rootScope, $location, Auth) {
+function metaracerAppRun($rootScope, $location, Auth, $state) {
   // Redirect to login if route requires auth and you're not logged in
   $rootScope.$on('$stateChangeStart', function (event, next) {
     Auth.isLoggedInAsync(function(loggedIn) {
       if (next.authenticate && !loggedIn) {
         event.preventDefault();
-        $location.path('/login');
+        $state.go('auth.login');
       }
 
       if (next.requiredRole && loggedIn && next.requiredRole !== loggedIn.role) {
         event.preventDefault();
-        $location.path('/');
+        $state.go('main');
       }
     });
   });

@@ -91,4 +91,8 @@ describe('Member Model', function() {
       done();
     });
   });
+
+  it('should fail when attempting to delete the owner', function(done){
+    done();
+  });
 });

@@ -3,7 +3,7 @@
     &#9776;
   </button>
   <div class="collapse navbar-toggleable-xs" collapse="isCollapsed">
-    <a class="navbar-brand branding" href="/">Metaracer</a>
+    <a class="navbar-brand" ng-class="{'branding':!organization}" href="/">{{organization.acronym || 'Metaracer'}}</a>
     <ul ng-cloak ng-show="isLoggedIn()" class="nav navbar-nav pull-right">
       <li class="nav-item" ng-class="{active: isActive('/settings')}">
         <a class="nav-link" href="/settings"><span class="fa fa-gear"></span> {{ getCurrentUser().email}}</a>

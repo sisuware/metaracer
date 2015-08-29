@@ -8,7 +8,14 @@ var authTypes = ['github', 'twitter', 'facebook', 'google'];
 var UserSchema = new Schema({
   firstName: String,
   lastName: String,
-  email: { type: String, lowercase: true },
+  email: { 
+    type: String, 
+    lowercase: true 
+  },
+  verifiedEmail: {
+    type: Boolean,
+    default: false
+  },
   role: {
     type: String,
     default: 'user'
@@ -115,6 +122,11 @@ var validatePresenceOf = function(value) {
 UserSchema
   .pre('save', function(next) {
     if (!this.isNew) return next();
+
+    // force verifiedEmail to be false on create
+    if (this.verifiedEmail) {
+      this.verifiedEmail = false;
+    }
 
     if (!validatePresenceOf(this.hashedPassword) && authTypes.indexOf(this.provider) === -1)
       next(new Error('Invalid password'));

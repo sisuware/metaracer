@@ -18,7 +18,16 @@ exports.index = function(req, res) {
 exports.show = function(req, res) {
   Organization.findById(req.params.id, function (err, organization) {
     if(err) { return handleError(res, err); }
-    if(!organization) { return res.status(404).send('Not Found'); }
+    if(!organization) { return handleNotFound(res, err); }
+    return res.json(organization);
+  });
+};
+
+// Get a single organization, by it's subdomain
+exports.subdomain = function(req, res) {
+  Organization.findOne({'subdomain': req.params.id}, function (err, organization) {
+    if(err) { return handleError(res, err); }
+    if(!organization) { return handleNotFound(res, err); }
     return res.json(organization);
   });
 };
@@ -35,8 +44,9 @@ exports.create = function(req, res) {
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
   Organization.findById(req.params.id, function (err, organization) {
-    if (err) { return handleError(res, err); }
-    if(!organization) { return res.status(404).send('Not Found'); }
+    if(err) { return handleError(res, err); }
+    if(!organization) { return handleNotFound(res, err); }
+
     var updated = _.merge(organization, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
@@ -47,10 +57,14 @@ exports.update = function(req, res) {
 
 // Deletes a organization from the DB.
 exports.destroy = function(req, res) {
+  console.log(req.params);
+  
   Organization.findById(req.params.id, function (err, organization) {
     if(err) { return handleError(res, err); }
-    if(!organization) { return res.status(404).send('Not Found'); }
+    if(!organization) { return handleNotFound(res, err); }
+
     organization.remove(function(err) {
+      
       if(err) { return handleError(res, err); }
       return res.status(204).send('No Content');
     });
@@ -59,4 +73,8 @@ exports.destroy = function(req, res) {
 
 function handleError(res, err) {
   return res.status(500).send(err);
+}
+
+function handleNotFound(res, err) {
+  res.status(404).send('Not Found');
 }
