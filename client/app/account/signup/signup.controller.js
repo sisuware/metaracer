@@ -1,7 +1,13 @@
-'use strict';
+(function(){
+  'use strict';
 
-angular.module('metaracerApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location, $window) {
+  angular
+    .module('metaracerApp')
+    .controller('SignupController', SignupController);
+
+  SignupController.$inject = ['$scope','Auth','$state','$window'];
+
+  function SignupController($scope, Auth, $state, $window) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -16,8 +22,11 @@ angular.module('metaracerApp')
           password: $scope.user.password
         })
         .then( function() {
-          // Account created, redirect to home
-          $location.path('/');
+          if ($scope.organization) {
+            $state.go('dashboard')
+          } else {
+            $state.go('main');
+          }
         })
         .catch( function(err) {
           err = err.data;
@@ -37,4 +46,6 @@ angular.module('metaracerApp')
     $scope.loginOauth = function(provider) {
       $window.location.href = '/auth/' + provider;
     };
-  });
+  }
+
+})();

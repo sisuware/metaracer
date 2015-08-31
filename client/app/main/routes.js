@@ -18,5 +18,6 @@
         templateUrl: 'app/main/main.auth.html'
         //controller: 'MainController'
       });
+
   }
 })();

@@ -20,7 +20,7 @@
       .state('auth.signup', {
         url: '/signup',
         templateUrl: 'app/account/signup/signup.html',
-        controller: 'SignupCtrl'
+        controller: 'SignupController'
       })
       .state('settings', {
         url: '/settings',

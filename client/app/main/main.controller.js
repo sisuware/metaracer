@@ -5,11 +5,15 @@
     .module('metaracerApp')
     .controller('MainController', MainController);
 
-  MainController.$inject = ['$scope','$state'];
+  MainController.$inject = ['$scope','$state','Auth'];
 
-  function MainController($scope, $state) {
+  function MainController($scope, $state, Auth) {
     if ($scope.organization) {
-      $state.go('main.auth');
+      if (Auth.isLoggedIn()) {
+        $state.go('dashboard');
+      } else {
+        $state.go('main.auth');
+      }
     }    
   }
 })();
