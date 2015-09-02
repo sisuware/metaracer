@@ -16,9 +16,9 @@ exports.register = function(socket) {
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('member:save', doc);
+  socket.emit('member:save');
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('member:remove', doc);
+  socket.emit('member:remove');
 }

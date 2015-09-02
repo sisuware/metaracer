@@ -52,7 +52,7 @@ exports.destroy = function(req, res) {
     if(!member) { return res.status(404); }
     member.remove(function(err) {
       if(err) { return handleError(res, err); }
-      return res.status(204);
+      return res.status(204).send('No Content');
     });
   });
 };

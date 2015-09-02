@@ -14,13 +14,14 @@ var subdomain = require('express-subdomain');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
 
+console.log(process.env);
+
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
 mongoose.connection.on('error', function(err) {
 	console.error('MongoDB connection error: ' + err);
 	process.exit(-1);
-	}
-);
+});
 
 var httpsConfig = {
   key: fs.readFileSync(config.https.keyFile),
@@ -39,8 +40,8 @@ var socketio = require('socket.io')(server, {
 require('./config/socketio')(socketio);
 require('./config/express')(app);
 require('./routes')(app);
+require('./config/sqs')();
 
-//app.use(subdomain('api', router));
 app.use(helmet.hsts(config.helmet));
 
 // Start server

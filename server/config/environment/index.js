@@ -78,6 +78,23 @@ var all = {
     clientID:     process.env.GOOGLE_ID || 'id',
     clientSecret: process.env.GOOGLE_SECRET || 'secret',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/google/callback'
+  },
+
+  aws: {
+    ses: {
+      accessKeyId: process.env.AWS_SES_ID,
+      secretAccessKey: process.env.AWS_SES_KEY,
+      region: 'us-west-2'
+    },
+    sqs: {
+      accessKeyId: process.env.AWS_SQS_ID,
+      secretAccessKey: process.env.AWS_SQS_KEY,
+      region: 'us-west-2',
+      apiVersions: '2012-11-05',
+      params: {
+        QueueName: 'metaracer-dev'
+      }
+    }
   }
 };
 

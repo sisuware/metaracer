@@ -26,8 +26,7 @@
         controller: 'MembersIndexController',
         authenticate: true,
         resolve: {
-          organization: organizationResolve,
-          members: membersResolve
+          organization: organizationResolve
         }
       });
   }

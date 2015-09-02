@@ -16,6 +16,7 @@ var UserSchema = new Schema({
     type: Boolean,
     default: false
   },
+  verificationHash: String,
   role: {
     type: String,
     default: 'user'
@@ -49,6 +50,12 @@ UserSchema
       'name': [this.firstName, this.lastName].join(' '),
       'role': this.role
     };
+  });
+
+UserSchema
+  .virtual('fullName')
+  .get(function() {
+    return [this.firstName, this.lastName].join(' ');
   });
 
 // Non-sensitive info we'll be putting in the token
@@ -126,6 +133,7 @@ UserSchema
     // force verifiedEmail to be false on create
     if (this.verifiedEmail) {
       this.verifiedEmail = false;
+      this.verificationHash = this.makeVerificationHash();
     }
 
     if (!validatePresenceOf(this.hashedPassword) && authTypes.indexOf(this.provider) === -1)
@@ -135,13 +143,6 @@ UserSchema
   });
 
 
-/**
- * Post-save hook
- */
-UserSchema
-  .post('save', function(user) {
-    // todo: send welcome/verification email.
-  });
 /**
  * Methods
  */
@@ -178,6 +179,10 @@ UserSchema.methods = {
     if (!password || !this.salt) return '';
     var salt = new Buffer(this.salt, 'base64');
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+  },
+
+  makeVerificationHash: function() {
+    return crypto.randomBytes(20).toString('hex');
   }
 };
 
