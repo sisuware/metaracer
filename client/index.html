@@ -29,12 +29,6 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- <navbar></navbar>
-    <div class="row-fluid clearfix">
-      <sidebar></sidebar>
-      <div class="col-sm-12 col-md-10 col-md-offset-2 main" ui-view=""></div>
-    </div> -->
-
     <ui-view></ui-view>
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -60,10 +54,13 @@
         
         <script src="app/app.js"></script>
           <!-- injector:js -->
+          <script src="app/account/confirm/confirm-email.controller.js"></script>
+          <script src="app/account/confirm/confirm.controller.js"></script>
           <script src="app/account/login/login.controller.js"></script>
           <script src="app/account/routes.js"></script>
           <script src="app/account/settings/settings.controller.js"></script>
           <script src="app/account/signup/signup.controller.js"></script>
+          <script src="app/account/verify/verify.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
           <script src="app/dashboard/dashboard-verify-email.controller.js"></script>

@@ -2,6 +2,7 @@
 
 angular.module('metaracerApp')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
+    $scope.user = User.get();
     $scope.errors = {};
 
     $scope.changePassword = function(form) {

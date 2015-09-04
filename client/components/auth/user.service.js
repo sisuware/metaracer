@@ -17,6 +17,12 @@ angular.module('metaracerApp')
         params: {
           id:'me'
         }
+      },
+      verifyEmail: {
+        method: 'PUT',
+        params: {
+          controller: 'verifyEmail'
+        }
       }
 	  });
   });

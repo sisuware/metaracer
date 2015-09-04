@@ -48,7 +48,21 @@ UserSchema
   .get(function() {
     return {
       'name': [this.firstName, this.lastName].join(' '),
+      'email': this.email,
       'role': this.role
+    };
+  });
+
+// Public profile information
+UserSchema
+  .virtual('me')
+  .get(function() {
+    return {
+      'name': [this.firstName, this.lastName].join(' '),
+      'email': this.email,
+      '_id': this.id,
+      'role': this.role,
+      'verifiedEmail': this.verifiedEmail
     };
   });
 
@@ -133,6 +147,9 @@ UserSchema
     // force verifiedEmail to be false on create
     if (this.verifiedEmail) {
       this.verifiedEmail = false;
+    }
+
+    if (!this,verificationHash) {
       this.verificationHash = this.makeVerificationHash();
     }
 
@@ -183,6 +200,10 @@ UserSchema.methods = {
 
   makeVerificationHash: function() {
     return crypto.randomBytes(20).toString('hex');
+  },
+  validateVerificationHash: function(hash) {
+    console.log(hash, this.verificationHash);
+    return hash === this.verificationHash;
   }
 };
 

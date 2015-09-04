@@ -12,6 +12,10 @@
       'organization': [
         {'title': 'Forms', 'link': 'organizations/:id/forms' },
         {'title': 'Members', 'link': 'organizations/:id/members' },
+      ],
+      'settings': [
+        {'title': 'Account', 'link': 'settings' },
+        {'title': 'Password', 'link': 'settings/password' }
       ]
     };
 
@@ -40,7 +44,7 @@
         var regex = new RegExp(':(' + keys.join('|') + ')');
         var match = link.match(regex);
 
-        if (match.length) {
+        if (match && match.length) {
           link = link.replace(match[0], $state.params[match[1]]);
         } 
 

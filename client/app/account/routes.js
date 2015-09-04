@@ -27,6 +27,35 @@
         templateUrl: 'app/account/settings/settings.html',
         controller: 'SettingsCtrl',
         authenticate: true
+      })
+      .state('settings.password', {
+        url: '/password',
+        templateUrl: 'app/account/settings/password.html',
+        controller: 'SettingsCtrl',
+        authenticate: true
+      })
+      .state('confirm', {
+        url:'/confirm',
+        templateUrl: 'app/account/confirm/layout.html',
+        controller: 'ConfirmController',
+        authenticate: true
+      })
+      .state('confirm.email', {
+        url: '/email',
+        templateUrl: 'app/account/confirm/email.html',
+        controller: 'ConfirmEmailController',
+        authenticate: true
+      })
+      .state('verify', {
+        url: '/verify',
+        templateUrl: 'app/account/verify/layout.html',
+        controller: 'VerifyController',
+        authenticate: true
+      })
+      .state('verify.email', {
+        url: '/email',
+        templateUrl: 'app/account/verify/email.html',
+        authenticate: true
       });
   }
 })();

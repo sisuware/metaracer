@@ -1,0 +1,21 @@
+<div class="row-fluid clearfix bg-primary p-t m-b p-b">
+  <div class="col-sm-12 text-center">
+    <i class="fa fa-circle"></i>
+    <i class="fa fa-circle"></i>
+  </div>
+</div>
+<div class="row-fluid">
+  <div ng-cloak ng-hide="confirmed" class="col-md-6 col-md-offset-3 m-t-lg text-center">
+    <i class="fa fa-envelope-o fa-3x m-b-lg text-muted text-thin"></i>
+    <div class="sk-three-bounce m-t-lg">
+      <div class="sk-child sk-bounce1 bg-primary"></div>
+      <div class="sk-child sk-bounce2 bg-primary"></div>
+      <div class="sk-child sk-bounce3 bg-primary"></div>
+    </div>
+  </div>
+  <div ng-cloak ng-show="confirmed" class="col-md-6 col-md-offset-3 m-t-lg text-center">
+    <i class="fa fa-check-circle fa-3x m-b-lg text-success text-thin"></i>
+    <p class="lead">Your email address is now confirmed.</p>
+    <a ui-sref="dashboard" class="btn btn-primary-outline">Continue</a>
+  </div>
+</div>

@@ -25,7 +25,7 @@ exports.show = function(req, res) {
 
 // Get a single organization, by it's subdomain
 exports.subdomain = function(req, res) {
-  Organization.findOne({'subdomain': req.params.id}, function (err, organization) {
+  Organization.findOne({'subdomain': req.params.id}, '-_owner', function (err, organization) {
     if(err) { return handleError(res, err); }
     if(!organization) { return handleNotFound(res, err); }
     return res.json(organization);

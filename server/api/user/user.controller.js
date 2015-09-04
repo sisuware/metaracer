@@ -19,7 +19,6 @@ function extractSubdomain(req) {
   }
 }
 
-
 /**
  * Get list of users
  * restriction: 'admin'
@@ -110,6 +109,21 @@ exports.changePassword = function(req, res, next) {
   });
 };
 
+exports.verifyEmail = function(req, res, next) {
+  User.findById(req.params.id, function(err, user) {
+    if(err) return res.status(500).send(err);
+    if (req.body.hash && user.validateVerificationHash(req.body.hash)) {
+      user.verifiedEmail = true;
+      user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.status(200).send('OK');
+      });
+    } else {
+      res.status(403).send('Invalid');
+    }
+  });
+}
+
 /**
  * Get my info
  */
@@ -120,7 +134,7 @@ exports.me = function(req, res, next) {
   }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
     if (err) return next(err);
     if (!user) return res.status(401).send('Unauthorized');
-    res.json(user);
+    res.json(user.me);
   });
 };
 

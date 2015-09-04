@@ -11,7 +11,7 @@
     $scope.user = Auth.getCurrentUser();
 
     if ($scope.user && !$scope.user.verifiedEmail) {
-      $state.go('dashboard.verifyEmail')
+      $state.go('verify.email');
     }
   }
 })();

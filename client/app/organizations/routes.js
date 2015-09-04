@@ -33,7 +33,8 @@
       .state('organizations', {
         url: '/organizations',
         templateUrl: 'app/organizations/index.html',
-        controller: 'OrganizationsIndexController'
+        controller: 'OrganizationsIndexController',
+        authenticate: true
       })
       .state('newOrganization', {
         url: '/organizations/new',

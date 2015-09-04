@@ -36,7 +36,7 @@ function metaracerAppRun($rootScope, $location, Auth, $state) {
 
       if (next.requiredRole && loggedIn && next.requiredRole !== loggedIn.role) {
         event.preventDefault();
-        $state.go('main');
+        $state.go('dashboard');
       }
     });
   });
