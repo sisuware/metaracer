@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('metaracerApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
+  .controller('LoginCtrl', function ($scope, Auth, $location, $window, $state) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -15,7 +15,7 @@ angular.module('metaracerApp')
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/');
+          $state.go('dashboard');
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

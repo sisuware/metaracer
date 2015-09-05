@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'> -->
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/angular-form-gen/dist/angular-form-gen.css" />
@@ -24,7 +24,7 @@
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
-  <body ng-app="metaracerApp" preloader>
+  <body ng-app="metaracerApp" subdomain>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -63,13 +63,13 @@
           <script src="app/account/verify/verify.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
-          <script src="app/dashboard/dashboard-verify-email.controller.js"></script>
           <script src="app/dashboard/dashboard.controller.js"></script>
           <script src="app/dashboard/routes.js"></script>
           <script src="app/form/forms-index.controller.js"></script>
           <script src="app/form/forms-new.controller.js"></script>
           <script src="app/form/forms.resource.js"></script>
           <script src="app/form/routes.js"></script>
+          <script src="app/legal/routes.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/routes.js"></script>
           <script src="app/members/members-index.controller.js"></script>
@@ -84,6 +84,7 @@
           <script src="components/auth/user.service.js"></script>
           <script src="components/mongoose-error/mongoose-error.directive.js"></script>
           <script src="components/navbar/navbar.directive.js"></script>
+          <script src="components/organization/subdomain.directive.js"></script>
           <script src="components/preloader/preloader.directive.js"></script>
           <script src="components/sidebar/sidebar.directive.js"></script>
           <script src="components/socket/socket.service.js"></script>

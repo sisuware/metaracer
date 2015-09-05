@@ -11,11 +11,14 @@
     $stateProvider
       .state('main', {
         url: '/',
-        templateUrl: 'app/main/main.html',
+        templateUrl: 'app/main/layout.html',
         controller: 'MainController'
       })
-      .state('main.auth', {
-        templateUrl: 'app/main/main.auth.html'
+      .state('main.public', {
+        templateUrl: 'app/main/main.public.html'
+      })
+      .state('main.organization', {
+        templateUrl: 'app/main/main.organization.html'
         //controller: 'MainController'
       });
 

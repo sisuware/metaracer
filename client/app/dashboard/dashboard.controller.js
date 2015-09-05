@@ -8,10 +8,19 @@
   DashboardController.$inject = ['$scope','$state','Auth'];
 
   function DashboardController($scope, $state, Auth) {
-    $scope.user = Auth.getCurrentUser();
+    Auth.getCurrentUser().$promise.then(function(user){
+      $scope.user = user;
+      determineState();
+    });
 
-    if ($scope.user && !$scope.user.verifiedEmail) {
-      $state.go('verify.email');
+    function determineState() {
+      if ($scope.user && !$scope.user.verifiedEmail) {
+        $state.go('verify.email');
+      }  
+
+      if (!$scope.organization) {
+        
+      }
     }
   }
 })();

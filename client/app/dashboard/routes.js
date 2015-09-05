@@ -11,7 +11,7 @@
     $stateProvider
       .state('dashboard', {
         url: '/dashboard',
-        templateUrl: 'app/dashboard/index.html',
+        templateUrl: 'app/dashboard/layout.html',
         controller: 'DashboardController',
         authenticate: true
       });

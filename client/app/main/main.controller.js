@@ -8,12 +8,26 @@
   MainController.$inject = ['$scope','$state','Auth'];
 
   function MainController($scope, $state, Auth) {
-    if ($scope.organization) {
-      if (Auth.isLoggedIn()) {
-        $state.go('dashboard');
-      } else {
-        $state.go('main.auth');
+    $scope.$on('subdomain', determineState);
+
+    function determineState(event, org) {
+      if (!org) {
+        if (Auth.isLoggedIn()) {
+          $state.go('dashboard');
+        } else {
+          $state.go('main.public');  
+        }
       }
-    }    
+
+      if (org) {
+        if (Auth.isLoggedIn()) {
+          $state.go('dashboard');
+        } else {
+          $state.go('main.organization')
+        }
+      }
+    }
+
+    determineState(null, $scope.organization);
   }
 })();

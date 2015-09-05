@@ -16,7 +16,8 @@
       'settings': [
         {'title': 'Account', 'link': 'settings' },
         {'title': 'Password', 'link': 'settings/password' }
-      ]
+      ],
+      'legal': []
     };
 
     var directive = {

@@ -22,11 +22,7 @@
           password: $scope.user.password
         })
         .then( function() {
-          if ($scope.organization) {
-            $state.go('dashboard')
-          } else {
-            $state.go('main');
-          }
+          $state.go('dashboard');
         })
         .catch( function(err) {
           err = err.data;

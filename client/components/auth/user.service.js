@@ -19,7 +19,7 @@ angular.module('metaracerApp')
         }
       },
       verifyEmail: {
-        method: 'PUT',
+        method: 'PUT  ',
         params: {
           controller: 'verifyEmail'
         }
