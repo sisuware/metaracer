@@ -1,7 +1,14 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var roleStates = {
+  'admin': 'organization',
+  'user': 'membership.new',
+  'member': 'membership',
+  'inactive': 'membership.inactive'
+};
 
 var MemberSchema = new Schema({
   _organization: {
@@ -18,9 +25,32 @@ var MemberSchema = new Schema({
   }
 });
 
-var validatePresenceOf = function(value) {
+function validatePresenceOf(value) {
   return value && String(value).length;
-};
+}
+
+function memberState(member) {
+  var state = 'main';
+  if (member.role) {
+    state = {
+      'go': roleStates[member.role], 
+      'params': {'id': member._organization }
+    };
+  }
+
+  return state;
+}
+
+
+
+MemberSchema
+  .virtual('state')
+  .get(function(){
+    return {
+      'role': this.role,
+      'state': memberState(this)
+    };
+  });
 
 MemberSchema
   .pre('save', function(next){

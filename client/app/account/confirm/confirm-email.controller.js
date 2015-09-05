@@ -24,7 +24,7 @@
     });
 
     function verifyEmail(hash) {
-      Auth.verifyEmail().$promise.then(function(res){
+      Auth.verifyEmail(hash).$promise.then(function(res){
         $scope.confirmed = true;
       }, function(err){
         $scope.error = err;

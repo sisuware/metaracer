@@ -68,9 +68,7 @@ exports.create = function (req, res, next) {
  * Get a single user
  */
 exports.show = function (req, res, next) {
-  var userId = req.params.id;
-
-  User.findById(userId, function (err, user) {
+  User.findById(req.user._id, function (err, user) {
     if (err) return next(err);
     if (!user) return res.status(401).send('Unauthorized');
     res.json(user.profile);
@@ -110,8 +108,9 @@ exports.changePassword = function(req, res, next) {
 };
 
 exports.verifyEmail = function(req, res, next) {
-  User.findById(req.params.id, function(err, user) {
+  User.findById(req.user._id, function(err, user) {
     if(err) return res.status(500).send(err);
+    console.log(req.query, req.params, req.query);
     if (req.body.hash && user.validateVerificationHash(req.body.hash)) {
       user.verifiedEmail = true;
       user.save(function(err) {
@@ -137,6 +136,19 @@ exports.me = function(req, res, next) {
     res.json(user.me);
   });
 };
+
+exports.membership = function(req, res, next) {
+  console.log(req.query, req.params, req.body);
+
+  User.model('Member').findOne(
+    {_organization: req.query.organization, _user: req.user._id}, 
+    '-_user -_id', 
+  function(err, membership){
+    if (err) return next(err);
+    res.json(membership.state);
+  });
+};
+
 
 /**
  * Authentication callback

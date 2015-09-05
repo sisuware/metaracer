@@ -16,10 +16,10 @@
     function determineState() {
       if ($scope.user && !$scope.user.verifiedEmail) {
         $state.go('verify.email');
-      }  
-
-      if (!$scope.organization) {
-        
+      } else if ($scope.organization) {
+        Auth.membership($scope.organization._id).$promise.then(function(membership){
+          $state.go(membership.state.go, membership.state.params);
+        });
       }
     }
   }

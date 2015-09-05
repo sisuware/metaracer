@@ -47,7 +47,7 @@ UserSchema
   .virtual('profile')
   .get(function() {
     return {
-      'name': [this.firstName, this.lastName].join(' '),
+      'name': this.fullName,
       'email': this.email,
       'role': this.role
     };
@@ -58,7 +58,7 @@ UserSchema
   .virtual('me')
   .get(function() {
     return {
-      'name': [this.firstName, this.lastName].join(' '),
+      'name': this.fullName,
       'email': this.email,
       '_id': this.id,
       'role': this.role,
@@ -149,7 +149,7 @@ UserSchema
       this.verifiedEmail = false;
     }
 
-    if (!this,verificationHash) {
+    if (!this.verificationHash) {
       this.verificationHash = this.makeVerificationHash();
     }
 

@@ -23,7 +23,8 @@ function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
     isLoggedIn: isLoggedIn,
     isLoggedInAsync: isLoggedInAsync,
     isAdmin: isAdmin,
-    getToken: getToken
+    getToken: getToken,
+    membership: membership
   };
 
   return service;
@@ -113,6 +114,10 @@ function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
 
   function verifyEmail(hash) {
     return User.verifyEmail({id: currentUser._id },{'hash': hash});
+  }
+
+  function membership(id) {
+    return User.membership({'organization': id});
   }
 
   /**
