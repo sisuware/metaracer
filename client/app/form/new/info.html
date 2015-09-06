@@ -1,0 +1,64 @@
+<form novaldiate>
+  <div class="row-fluid clearfix">
+    <div class="col-md-9">
+      <legend>General Information</legend>
+      <fieldset class="form-group">
+        <label>Form Name</label>
+        <input type="text" class="form-control" ng-model="form.title" placeholder="Title" required>
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Form Description</label>
+        <textarea class="form-control" ng-model="form.description" rows="3" placeholder="Description" required></textarea>
+      </fieldset>
+      
+      <hr/>
+      
+      <legend>Sections</legend>
+      <p>A form section should contain fields specific to that section.</p>
+      <fieldset class="form-group">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Section</th>
+              <th>Description</th>
+              <th>Fields</th>
+              <th class="text-right">
+                <button class="btn btn-info-outline btn-sm" ng-click="form.fields.push({})"><i class="fa fa-plus"></i> Section</button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="section in form.fields">
+              <th scope="row">{{$index}}</th>
+              <td>
+                <input type="text" ng-model="section.name" ng-value="section.name" class="form-control form-control-sm">
+              </td>
+              <td>
+                <textarea rows="1" ng-model="section.description" ng-value="section.description" class="form-control form-control-sm"></textarea>
+              </td>
+              <td>{{section.fields.length|number}}</td>
+              <td class="text-right">
+                <button class="btn btn-sm btn-secondary-outline"><i class="fa fa-trash-o"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </fieldset>
+    </div>
+
+    <div class="col-md-3">
+      <fieldset class="form-group">
+        <label class="c-input c-checkbox">
+          <input type="checkbox" ng-model="form.published" value="true">
+          <span class="c-indicator"></span>
+          Published
+        </label>
+      </fieldset>
+      <select class="c-select" ng-model="form.year">
+        <option selected disabled>Select Year</option>
+        <option value="2015">2015</option>
+        <option value="2016">2016</option>
+      </select>
+    </div>
+</form>

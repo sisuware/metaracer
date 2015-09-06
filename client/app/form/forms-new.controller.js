@@ -5,19 +5,13 @@
     .module('metaracerApp')
     .controller('FormsNewController', FormsNewController);
 
-  FormsNewController.$inject = ['$scope','form','$state','organization'];
+  FormsNewController.$inject = ['$scope','form','$state','organization', '$stateParams'];
 
-  function FormsNewController($scope, form, $state, organization) {
+  function FormsNewController($scope, form, $state, organization, $stateParams) {
     $scope.organization = organization;
     $scope.form = form;
-    $scope.transitionTo = transitionTo;
     $scope.save = save;
-
-    $scope.form._organization = organization._id;
-
-    function transitionTo(state) {
-      $state.transitionTo(state, {'id': organization._id});
-    }
+    $scope.sectionIndex = sectionIndex;
     
 
     function save() {
@@ -30,9 +24,22 @@
       });
     }
 
+    function sectionIndex() {
+      console.log($state.params);
+      return parseInt($state.params.section);
+    }
+
     function _reset() {
       $scope.errors = false;
     }
+
+    function _formDefaults() {
+      $scope.form._organization = organization._id;
+      $scope.form.fields = [];
+      $scope.form.fields.push({'name':'Personal Information', 'description':''});
+    }
+
+    _formDefaults();
   }
 
 })();

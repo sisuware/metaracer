@@ -1,0 +1,16 @@
+<div class="card bg-white">
+  <div class="card-header bg-white p-t-lg p-b-md">
+    <h3 class="text-center">{{form.title}}</h3>
+    <p class="lead text-center text-muted">{{form.description}}</p>
+  </div>
+  <ul class="nav nav-pills clearfix nav-steps">
+    <li class="nav-item" ng-repeat="section in form.fields">
+      <a href="" ng-click="selectSection(section)" class="nav-link" ng-class="{'active':isActive(section)}"><!-- <span class="label label-pill label-default">1</span> --> {{$index + 1}}. {{section.name}}</a>
+    </li>
+  </ul>
+  <div class="card-block">
+    <form novalidate class="form">
+      <div fg-form fg-form-data="myFormData" fg-schema="activeSection"></div>
+    </form>
+  </div>
+</div>

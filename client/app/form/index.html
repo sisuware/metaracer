@@ -1,46 +1,40 @@
-<navbar></navbar>
-<div class="row-fluid clearfix">
-  <sidebar menu="organization"></sidebar>
-  <div class="col-sm-12 col-md-10 col-md-offset-2 main">
-    <div class="row clearfix bg-faded p-t m-b p-b">
-      <div class="col-sm-6">
-        <h5 class="m-a-0">{{organization.acronym}} Forms</h5>
-      </div>
-      <div class="col-sm-6 text-right">
-        <a ng-href="/organizations/{{organization._id}}/forms/new/settings" class="btn btn-primary-outline btn-sm"><i class="fa fa-plus"></i> Form</a>
-      </div>
-    </div>
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Published</th>
-            <th>Year</th>
-            <th>Last Updated</th>
-            <th class="text-right">
-            </th>
-          </tr>
-        </thead>
-        <tbody ng-cloak ng-show="forms.length">
-          <tr ng-repeat="form in forms">
-            <td>{{form.title}}</td>
-            <td>{{form.description}}</td>
-            <td>{{form.published}}</td>
-            <td>{{form.year}}</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-        <tbody ng-cloak ng-hide="forms.length">
-          <tr>
-            <td colspan="6">
-              <p class="help-block">No forms exist yet for your organization. <a ng-href="/organizations/{{organization._id}}/forms/new/settings">Create a Form</a></p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="row clearfix bg-faded p-t m-b p-b">
+  <div class="col-sm-6">
+    <h5 class="m-a-0">{{organization.acronym}} Forms</h5>
   </div>
+  <div class="col-sm-6 text-right">
+    <a ui-sref="forms.new" class="btn btn-primary-outline btn-sm"><i class="fa fa-plus"></i> Form</a>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Published</th>
+        <th>Year</th>
+        <th>Last Updated</th>
+        <th class="text-right">
+        </th>
+      </tr>
+    </thead>
+    <tbody ng-cloak ng-show="forms.length">
+      <tr ng-repeat="form in forms">
+        <td><a ui-sref="forms.show({form_id: form._id})">{{form.title}}</a></td>
+        <td>{{form.description}}</td>
+        <td>{{form.published}}</td>
+        <td>{{form.year}}</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+    <tbody ng-cloak ng-hide="forms.length">
+      <tr>
+        <td colspan="6">
+          <p class="help-block">No forms exist yet for your organization. <a ui-sref="forms.new">Create a Form</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

@@ -10,12 +10,12 @@
   function sidebar($location, Auth, $state) {
     var menus = {
       'organization': [
-        {'title': 'Forms', 'link': 'organizations/:id/forms' },
-        {'title': 'Members', 'link': 'organizations/:id/members' },
+        {'title': 'Forms', 'param': 'organizations', 'go':'forms.list' },
+        {'title': 'Members', 'param': 'organizations', 'go':'members' },
       ],
       'settings': [
-        {'title': 'Account', 'link': 'settings' },
-        {'title': 'Password', 'link': 'settings/password' }
+        {'title': 'Account', 'link': 'settings', 'go':'settings'},
+        {'title': 'Password', 'link': 'settings/password', 'go':'settings.password' }
       ],
       'legal': []
     };
@@ -34,10 +34,18 @@
       scope.isAdmin = Auth.isAdmin;
       scope.getCurrentUser = Auth.getCurrentUser;
       scope.isActive = isActive;
-      scope.unwrapLink = unwrapLink;
+      scope.stateParam = stateParam;
 
       function isActive(route) {
         return route === $location.path();
+      }
+
+      function stateParam() {
+        if ($state.params) {
+          return $state.params;
+        } else {
+          return false;
+        }
       }
 
       function unwrapLink(link) {
