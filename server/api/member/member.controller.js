@@ -6,7 +6,7 @@ var Member = require('./member.model');
 // Get list of members
 exports.index = function(req, res) {
   Member
-  .find()
+  .find({'_organization':req.organization._id})
   .populate('_user','email firstName lastName')
   .exec(function (err, members) {
     if(err) { return handleError(res, err); }

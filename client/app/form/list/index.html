@@ -15,18 +15,21 @@
         <th>Published</th>
         <th>Year</th>
         <th>Last Updated</th>
-        <th class="text-right">
-        </th>
+        <th class="text-right"></th>
       </tr>
     </thead>
     <tbody ng-cloak ng-show="forms.length">
       <tr ng-repeat="form in forms">
-        <td><a ui-sref="forms.show({form_id: form._id})">{{form.title}}</a></td>
+        <td><a ui-sref="forms.edit({form_id: form._id})">{{form.title}}</a></td>
         <td>{{form.description}}</td>
         <td>{{form.published}}</td>
         <td>{{form.year}}</td>
         <td></td>
-        <td></td>
+        <td class="text-right">
+          <a ui-sref="forms.delete({form_id: form._id})" class="btn btn-sm btn-secondary-outline"><i class="fa fa-trash-o"></i></a>
+          <a ui-sref="forms.show({form_id: form._id})" class="btn btn-sm btn-info-outline"><i class="fa fa-eye"></i></a>
+          <a ui-sref="forms.edit({form_id: form._id})" class="btn btn-sm btn-primary-outline"><i class="fa fa-pencil"></i></a>
+        </td>
       </tr>
     </tbody>
     <tbody ng-cloak ng-hide="forms.length">

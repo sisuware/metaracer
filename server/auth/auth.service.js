@@ -10,6 +10,16 @@ var User = require('../api/user/user.model');
 var Organization = require('../api/organization/organization.model');
 var validateJwt = expressJwt({ secret: config.secrets.session });
 
+function extractSubdomain(req) {
+  var host = req.headers.host;
+  var subdomain = host.split('.');
+  if (subdomain && subdomain.length === 2) {
+    return subdomain[0];
+  } else {
+    return false;
+  }
+}
+
 /**
  * Attaches the user object to the request if authenticated
  * Otherwise returns 403
@@ -36,6 +46,25 @@ function isAuthenticated() {
     });
 }
 
+function isOrganization() {
+  return compose()
+    .use(function(req, res, next) {
+      var subdomain = extractSubdomain(req);
+
+      if (!subdomain) {
+        return res.status(401).send('Unauthorized');
+      }
+
+      User.model('Organization').findOne({'subdomain': subdomain}, function(err, organization){
+        if (err) return next(err);
+        if (!organization) return res.status(401).send('Unauthorized');
+
+        req.organization = organization;
+        next();
+      });
+    });
+}
+
 /**
  * Checks if the user role meets the minimum requirements of the route
  */
@@ -47,8 +76,7 @@ function hasRole(roleRequired) {
     .use(function meetsRequirements(req, res, next) {
       if (config.userRoles.indexOf(req.user.role) >= config.userRoles.indexOf(roleRequired)) {
         next();
-      }
-      else {
+      } else {
         res.status(403).send('Forbidden');
       }
     });
@@ -59,9 +87,26 @@ function isOrganizationOwner() {
     .use(isAuthenticated())
     .use(function meetsRequirements(req, res, next) {
       Organization.findById(req.params.id, function(err, organization){
-        if (parseInt(organization._owner) !== parseInt(req.user._id)) {
+        if (err) return next(err);
+
+        console.log(organization, req.user);
+        if (!organization || !req.user || parseInt(organization._owner) !== parseInt(req.user._id)) {
           return res.status(403).send('Forbidden');
         }
+        next();
+      });
+    });
+}
+
+function isOrganizationAdmin() {
+  return compose()
+    .use(isAuthenticated())
+    .use(isOrganization())
+    .use(function meetsRequirements(req, res, next) {
+      User.model('Member').findOne({'_user':req.user._id, '_organization':req.organization._id, 'role':'admin'}, function(err, membership){
+        if (err) return next(err);
+        if (!membership) return res.status(401).send('Unauthorized');
+
         next();
       });
     });
@@ -88,4 +133,5 @@ exports.isAuthenticated = isAuthenticated;
 exports.hasRole = hasRole;
 exports.signToken = signToken;
 exports.isOrganizationOwner = isOrganizationOwner;
+exports.isOrganizationAdmin = isOrganizationAdmin;
 exports.setTokenCookie = setTokenCookie;

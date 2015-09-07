@@ -5,9 +5,9 @@
     .module('metaracerApp')
     .controller('FormsNewController', FormsNewController);
 
-  FormsNewController.$inject = ['$scope','form','$state','organization', '$stateParams'];
+  FormsNewController.$inject = ['$scope','form','$state','organization'];
 
-  function FormsNewController($scope, form, $state, organization, $stateParams) {
+  function FormsNewController($scope, form, $state, organization) {
     $scope.organization = organization;
     $scope.form = form;
     $scope.save = save;
@@ -18,6 +18,7 @@
       _reset();
 
       $scope.form.$save().then(function(res){
+        $state.go('forms.edit', {'form_id': res._id});
         console.log(res);
       }, function(errors){
         $scope.errors = errors;
@@ -34,7 +35,7 @@
     }
 
     function _formDefaults() {
-      $scope.form._organization = organization._id;
+      $scope.form._organization = $scope.organization._id;
       $scope.form.fields = [];
       $scope.form.fields.push({'name':'Personal Information', 'description':''});
     }

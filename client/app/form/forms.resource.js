@@ -12,6 +12,10 @@
 
     return $resource(url, {
       id: '@_id'
+    }, {
+      update: {
+        method: 'PUT'
+      }
     });
   }
 

@@ -5,7 +5,6 @@ var Form = require('./form.model');
 
 // Get list of forms
 exports.index = function(req, res) {
-  console.log(req.query);
   Form.find(req.query, function (err, forms) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(forms);
@@ -36,6 +35,7 @@ exports.update = function(req, res) {
     if (err) { return handleError(res, err); }
     if(!form) { return res.status(404).send('Not Found'); }
     var updated = _.merge(form, req.body);
+    updated.markModified('fields');
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(form);

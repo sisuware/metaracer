@@ -37,7 +37,7 @@
         //abstract: true
       })
       .state('forms.list', {
-        templateUrl: 'app/form/index.html',
+        templateUrl: 'app/form/list/index.html',
         controller: 'FormsIndexController',
         authenticate: true,
         resolve: {
@@ -47,22 +47,41 @@
       })
       .state('forms.show', {
         url: '/:form_id/show',
-        templateUrl: 'app/form/show.html',
+        templateUrl: 'app/form/show/show.html',
         controller: 'FormsShowController',
         authenticate: true,
         resolve: {
           form: formResolve
         }
       })
+      .state('forms.delete', {
+        url: '/:form_id/delete',
+        templateUrl: 'app/form/delete/delete.html',
+        controller: 'FormsDeleteController',
+        authenticate: true,
+        resolve: {
+          form: formResolve
+        }
+      })
       .state('forms.edit', {
-        url: '/edit/:form_id',
-        templateUrl: 'app/form/edit.html',
+        url: '/:form_id/edit',
+        templateUrl: 'app/form/edit/layout.html',
         controller: 'FormsEditController',
         authenticate: true,
         resolve: {
           organization: organizationResolve,
           form: formResolve
         }
+      })
+      .state('forms.edit.info', {
+        url: '/info',
+        templateUrl: 'app/form/new/info.html',
+        authenticate: true
+      })
+      .state('forms.edit.fields', {
+        url: '/fields/:section',
+        templateUrl: 'app/form/new/fields.html',
+        authenticate: true
       })
       .state('forms.new', {
         url: '/new',

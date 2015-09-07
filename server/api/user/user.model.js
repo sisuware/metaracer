@@ -202,7 +202,6 @@ UserSchema.methods = {
     return crypto.randomBytes(20).toString('hex');
   },
   validateVerificationHash: function(hash) {
-    console.log(hash, this.verificationHash);
     return hash === this.verificationHash;
   }
 };

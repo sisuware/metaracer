@@ -57,8 +57,6 @@ exports.update = function(req, res) {
 
 // Deletes a organization from the DB.
 exports.destroy = function(req, res) {
-  console.log(req.params);
-  
   Organization.findById(req.params.id, function (err, organization) {
     if(err) { return handleError(res, err); }
     if(!organization) { return handleNotFound(res, err); }

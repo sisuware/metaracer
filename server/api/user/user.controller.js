@@ -46,7 +46,7 @@ exports.create = function (req, res, next) {
     if (subdomain) {
       User
         .model('Organization')
-        .findOne({'subdomain': req.params.id}, function (err, organization) {
+        .findOne({'subdomain': subdomain}, function (err, organization) {
           if(err || !organization) { console.log(err, organization); return false; }
 
           User.model('Member').create({
@@ -110,7 +110,6 @@ exports.changePassword = function(req, res, next) {
 exports.verifyEmail = function(req, res, next) {
   User.findById(req.user._id, function(err, user) {
     if(err) return res.status(500).send(err);
-    console.log(req.query, req.params, req.query);
     if (req.body.hash && user.validateVerificationHash(req.body.hash)) {
       user.verifiedEmail = true;
       user.save(function(err) {
@@ -138,8 +137,6 @@ exports.me = function(req, res, next) {
 };
 
 exports.membership = function(req, res, next) {
-  console.log(req.query, req.params, req.body);
-
   User.model('Member').findOne(
     {_organization: req.query.organization, _user: req.user._id}, 
     '-_user -_id', 

@@ -5,12 +5,27 @@
   </div>
   <ul class="nav nav-pills clearfix nav-steps">
     <li class="nav-item" ng-repeat="section in form.fields">
-      <a href="" ng-click="selectSection(section)" class="nav-link" ng-class="{'active':isActive(section)}"><!-- <span class="label label-pill label-default">1</span> --> {{$index + 1}}. {{section.name}}</a>
+      <a href="" ng-click="selectSection(section, formPreview, $index)" class="nav-link" ng-class="{'active':isActive(section), 'disabled':formPreview.$invalid || !isNext($index)}"> 
+        <span ng-cloak ng-show="isPrevious($index)"><i class="fa fa-check-circle"></i> {{section.name}}</span>
+        <span ng-cloak ng-hide="isPrevious($index)">{{$index + 1}}. {{section.name}}</span>
+      </a>
     </li>
   </ul>
   <div class="card-block">
-    <form novalidate class="form">
-      <div fg-form fg-form-data="myFormData" fg-schema="activeSection"></div>
+    <p>{{activeSection.description}}</p>
+    <form novalidate class="form" name="formPreview">
+      <div fg-form fg-form-data="formData[activeSection.name]" fg-schema="activeSection"></div>
     </form>
+    <hr/>
+    <div class="row-fluid clearfix">
+      <div class="col-sm-6">
+        <button ng-cloak ng-hide="isFirst()" class="btn btn-secondary-outline" ng-disabled="" ng-click="previousSection()">Previous</button>
+      </div>
+      <div class="col-sm-6 text-right">
+        <button ng-cloak ng-hide="isLast(form.fields)" class="btn btn-primary-outline" ng-disabled="formPreview.$invalid" ng-click="nextSection()">Next</button>
+        <button ng-cloak ng-show="isLast(form.fields)" class="btn btn-primary-outline" ng-disabled="formPreview.$invalid" ng-click="submit()">Submit</button>
+      </div>
+    </div>
   </div>
+  {{formData|json}}
 </div>

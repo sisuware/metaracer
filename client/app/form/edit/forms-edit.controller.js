@@ -8,19 +8,12 @@
   FormsEditController.$inject = ['$scope','form','$state','organization'];
 
   function FormsEditController($scope, form, $state, organization) {
-    $scope.organization = organization;
     $scope.form = form;
-    $scope.transitionTo = transitionTo;
-    $scope.save = save;
+    $scope.update = update;
+    $scope.sectionIndex = sectionIndex;
 
-    $scope.form._organization = organization._id;
 
-    function transitionTo(state) {
-      $state.transitionTo(state, {'id': organization._id});
-    }
-    
-
-    function save() {
+    function update() {
       _reset();
 
       $scope.form.$update().then(function(res){
@@ -28,6 +21,10 @@
       }, function(errors){
         $scope.errors = errors;
       });
+    }
+
+    function sectionIndex() {
+      return parseInt($state.params.section);
     }
 
     function _reset() {
