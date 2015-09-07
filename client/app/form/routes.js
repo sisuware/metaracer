@@ -10,19 +10,19 @@
   function metaracerAppConfig($stateProvider) {
     formsResolve.$inject = ['Forms','$stateParams'];
     formResolve.$inject = ['Forms','$stateParams'];
-    newFormResolve.$inject = ['Forms'];
+    newFormResolve.$inject = ['Forms', '$stateParams'];
     organizationResolve.$inject = ['Organizations', '$stateParams'];
 
     function organizationResolve(Organizations, $stateParams) {
       return Organizations.get({'id': $stateParams.id});
     }
 
-    function newFormResolve(Forms) {
-      return new Forms();
+    function newFormResolve(Forms, $stateParams) {
+      return new Forms({'_organization': $stateParams.id});
     }
 
     function formsResolve(Forms, $stateParams) {
-      return Forms.query({'_organization': $stateParams.id});
+      return Forms.query();
     }
 
     function formResolve(Forms, $stateParams) {
@@ -33,15 +33,15 @@
       .state('forms', {
         url: '/organizations/:id/forms',
         templateUrl: 'app/form/layout.html',
-        authenticate: true
-        //abstract: true
+        authenticate: true,
+        abstract: true
       })
       .state('forms.list', {
+        url:'',
         templateUrl: 'app/form/list/index.html',
         controller: 'FormsIndexController',
         authenticate: true,
         resolve: {
-          organization: organizationResolve,
           forms: formsResolve
         }
       })
@@ -69,7 +69,6 @@
         controller: 'FormsEditController',
         authenticate: true,
         resolve: {
-          organization: organizationResolve,
           form: formResolve
         }
       })
@@ -89,7 +88,6 @@
         controller: 'FormsNewController',
         authenticate: true,
         resolve: {
-          organization: organizationResolve,
           form: newFormResolve
         }
       })

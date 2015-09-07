@@ -5,7 +5,7 @@ var Form = require('./form.model');
 
 // Get list of forms
 exports.index = function(req, res) {
-  Form.find(req.query, function (err, forms) {
+  Form.find({'_organization': req.organization._id}, function (err, forms) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(forms);
   });

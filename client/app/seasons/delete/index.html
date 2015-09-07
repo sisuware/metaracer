@@ -1,0 +1,20 @@
+<div class="row clearfix bg-faded-b">
+  <div class="row-fluid clearfix bg-danger p-t m-b p-b">
+    <div class="col-sm-12">
+      <h5 class="m-a-0 text-thin">Delete: <i>{{season.year}}</i></h5>
+    </div>
+  </div>
+  <div class="col-sm-6 col-sm-offset-3">
+    <p class="lead text-center">Are you sure you want to delete this season?</p>
+
+    <div class="row-fluid clearfix m-t-lg m-b-lg">
+      <div class="col-md-6">
+        <a ui-sref="seasons.list" class="btn btn-secondary-outline btn-block">No, Cancel</a>
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-danger-outline btn-block" ng-click="confirmDelete()">Yes, Delete</button>
+      </div>
+    </div>
+    
+  </div>
+</div>

@@ -7,8 +7,11 @@ var FormSchema = new Schema({
   title: String,
   description: String,
   published: Boolean,
-  year: Date,
   fields: Schema.Types.Mixed,
+  _season: {
+    type: Schema.Types.ObjectId,
+    ref: 'Season'
+  },
   _organization: {
     type: Schema.Types.ObjectId,
     ref: 'Organization'

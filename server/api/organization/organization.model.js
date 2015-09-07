@@ -22,6 +22,12 @@ var OrganizationSchema = new Schema({
     },
     lowercase: true,
   },
+  attributes: [
+    {
+      key: String,
+      value: String
+    }
+  ],
   _owner: {
     type: Schema.Types.ObjectId,
     ref: 'User'

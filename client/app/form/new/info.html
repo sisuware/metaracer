@@ -10,9 +10,7 @@
         <label>Form Description</label>
         <textarea class="form-control" ng-model="form.description" rows="3" placeholder="Description" required></textarea>
       </fieldset>
-      
       <hr/>
-      
       <legend>Sections</legend>
       <p>A form section should contain fields specific to that section.</p>
       <fieldset class="form-group">
@@ -46,8 +44,8 @@
         </table>
       </fieldset>
     </div>
-
     <div class="col-md-3">
+      <legend>Attributes</legend>
       <fieldset class="form-group">
         <label class="c-input c-checkbox">
           <input type="checkbox" ng-model="form.published" value="true">
@@ -55,10 +53,11 @@
           Published
         </label>
       </fieldset>
-      <select class="c-select" ng-model="form.year">
-        <option selected disabled>Select Year</option>
-        <option value="2015">2015</option>
-        <option value="2016">2016</option>
-      </select>
+      <label>Season Year</label>
+      <fieldset class="form-group">
+        <select class="c-select" ng-model="form._season" ng-options="season._id as season.year for season in seasons">
+          <option selected disabled>Select Year</option>
+        </select>
+      </fieldset>
     </div>
 </form>

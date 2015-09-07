@@ -1,12 +1,13 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./form.controller');
+var controller = require('./season.controller');
 var auth = require('../../auth/auth.service');
 
 var router = express.Router();
 
 router.get('/', auth.isOrganizationAdmin(), controller.index);
+router.get('/years', auth.isOrganizationAdmin(), controller.years);
 router.get('/:id', auth.isOrganizationAdmin(), controller.show);
 router.post('/', auth.isOrganizationAdmin(), controller.create);
 router.put('/:id', auth.isOrganizationAdmin(), controller.update);

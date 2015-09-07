@@ -18,6 +18,12 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/motorcycle/motorcycle.socket').register(socket);
+  require('../api/race/race.socket').register(socket);
+  require('../api/number/number.socket').register(socket);
+  require('../api/license/license.socket').register(socket);
+  require('../api/transponder/transponder.socket').register(socket);
+  require('../api/season/season.socket').register(socket);
   require('../api/member/member.socket').register(socket);
   require('../api/organization/organization.socket').register(socket);
   require('../api/form/form.socket').register(socket);

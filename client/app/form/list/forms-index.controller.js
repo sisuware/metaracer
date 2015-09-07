@@ -5,10 +5,9 @@
     .module('metaracerApp')
     .controller('FormsIndexController', FormsIndexController);
 
-  FormsIndexController.$inject = ['$scope', 'forms', 'organization'];
+  FormsIndexController.$inject = ['$scope', 'forms'];
 
-  function FormsIndexController($scope, forms, organization) {
+  function FormsIndexController($scope, forms) {
     $scope.forms = forms;
-    $scope.organization = organization;
   }
 })();

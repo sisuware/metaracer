@@ -1,0 +1,43 @@
+<div class="row clearfix bg-faded p-t m-b p-b">
+  <div class="col-sm-6">
+    <h5 class="m-a-0">{{organization.acronym}} Seasons</h5>
+  </div>
+  <div class="col-sm-6 text-right">
+    <a ui-sref="seasons.new" class="btn btn-primary-outline btn-sm"><i class="fa fa-plus"></i> Season</a>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>License Renewal</th>
+        <th>Valid License</th>
+        <th class="text-right"></th>
+      </tr>
+    </thead>
+    <tbody ng-cloak ng-show="seasons.length">
+      <tr ng-repeat="season in seasons">
+        <td><a ui-sref="seasons.show({season_id: season._id})">{{season.year}}</a></td>
+        <td>
+          {{season.license.renewal.start|date:'M/d/yy'}} - {{season.license.renewal.end|date:'M/d/yy'}}
+        </td>
+        <td>
+          {{season.license.valid.start|date:'M/d/yy'}} - {{season.license.valid.end|date:'M/d/yy'}}
+        </td>
+        <td class="text-right">
+          <a ui-sref="seasons.delete({season_id: season._id})" class="btn btn-sm btn-secondary-outline"><i class="fa fa-trash-o"></i></a>
+          <a ui-sref="seasons.show({season_id: season._id})" class="btn btn-sm btn-info-outline"><i class="fa fa-eye"></i></a>
+          <a ui-sref="seasons.edit({season_id: season._id})" class="btn btn-sm btn-primary-outline"><i class="fa fa-pencil"></i></a>
+        </td>
+      </tr>
+    </tbody>
+    <tbody ng-cloak ng-hide="seasons.length">
+      <tr>
+        <td colspan="6">
+          <p class="help-block">No seasons exist yet for your organization. <a ui-sref="seasons.new">Create a Season</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

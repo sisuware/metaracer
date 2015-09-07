@@ -5,13 +5,13 @@
     .module('metaracerApp')
     .controller('FormsEditController', FormsEditController);
 
-  FormsEditController.$inject = ['$scope','form','$state','organization'];
+  FormsEditController.$inject = ['$scope','form','$state', 'Seasons'];
 
-  function FormsEditController($scope, form, $state, organization) {
+  function FormsEditController($scope, form, $state, Seasons) {
     $scope.form = form;
     $scope.update = update;
     $scope.sectionIndex = sectionIndex;
-
+    $scope.seasons = Seasons.years();
 
     function update() {
       _reset();
