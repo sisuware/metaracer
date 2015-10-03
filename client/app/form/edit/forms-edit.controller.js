@@ -30,6 +30,10 @@
     function _reset() {
       $scope.errors = false;
     }
+
+    if ($state.current.name === 'forms.edit') {
+      $state.go('forms.edit.info');
+    }
   }
 
 })();

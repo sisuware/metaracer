@@ -4,13 +4,14 @@ angular
   .module('metaracerApp')
   .factory('Auth', Auth);
 
-Auth.$inject = ['$location', '$rootScope', '$http', 'User', '$cookieStore', '$q'];
+Auth.$inject = ['UserResource', '$cookieStore', '$q', 'AuthResource'];
 
-function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+function Auth(UserResource, $cookieStore, $q, AuthResource) {
   var currentUser = {};
+  var tokenId = 'token';
   
-  if($cookieStore.get('token')) {
-    currentUser = User.get();
+  if($cookieStore.get(tokenId)) {
+    currentUser = UserResource.get();
   }
 
   var service = {
@@ -33,30 +34,18 @@ function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
    * Authenticate user and save token
    *
    * @param  {Object}   user     - login info
-   * @param  {Function} callback - optional
    * @return {Promise}
    */
-  function login(user, callback) {
-    var cb = callback || angular.noop;
-    var deferred = $q.defer();
-
-    $http.post('/auth/local', {
+  function login(user) {
+    var dfr = $q.defer();
+    var auth = new AuthResource({
       email: user.email,
       password: user.password
-    }).
-    success(function(data) {
-      $cookieStore.put('token', data.token);
-      currentUser = User.get();
-      deferred.resolve(data);
-      return cb();
-    }).
-    error(function(err) {
-      this.logout();
-      deferred.reject(err);
-      return cb(err);
-    }.bind(this));
+    });
 
-    return deferred.promise;
+    auth.$save().then(_authSuccess.bind(null, dfr), _authFailure.bind(null, dfr));
+
+    return dfr.promise;
   }
 
   /**
@@ -65,7 +54,7 @@ function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
    * @param  {Function}
    */
   function logout() {
-    $cookieStore.remove('token');
+    $cookieStore.remove(tokenId);
     currentUser = {};
   }
 
@@ -73,22 +62,15 @@ function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
    * Create a new user
    *
    * @param  {Object}   user     - user info
-   * @param  {Function} callback - optional
    * @return {Promise}
    */
-  function createUser(user, callback) {
-    var cb = callback || angular.noop;
+  function createUser(user) {
+    var dfr = $q.defer();
+    var user = new UserResource(user);
 
-    return User.save(user,
-      function(data) {
-        $cookieStore.put('token', data.token);
-        currentUser = User.get();
-        return cb(user);
-      },
-      function(err) {
-        this.logout();
-        return cb(err);
-      }.bind(this)).$promise;
+    user.$save().then(_authSuccess.bind(null, dfr), _authFailure.bind(null, dfr));
+
+    return dfr.promise;
   }
 
   /**
@@ -102,7 +84,7 @@ function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
   function changePassword(oldPassword, newPassword, callback) {
     var cb = callback || angular.noop;
 
-    return User.changePassword({ id: currentUser._id }, {
+    return UserResource.changePassword({ id: currentUser._id }, {
       oldPassword: oldPassword,
       newPassword: newPassword
     }, function(user) {
@@ -113,11 +95,11 @@ function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
   }
 
   function verifyEmail(hash) {
-    return User.verifyEmail({id: currentUser._id },{'hash': hash});
+    return UserResource.verifyEmail({id: currentUser._id },{'hash': hash});
   }
 
   function membership(id) {
-    return User.membership({'organization': id});
+    return UserResource.membership({'organization': id});
   }
 
   /**
@@ -168,6 +150,17 @@ function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
    * Get auth token
    */
   function getToken() {
-    return $cookieStore.get('token');
+    return $cookieStore.get(tokenId);
+  }
+
+  function _authSuccess(dfr, data) {
+    $cookieStore.put(tokenId, data.token);
+    currentUser = UserResource.get();
+    dfr.resolve(data);
+  }
+
+  function _authFailure(dfr, error) {
+    logout();
+    dfr.reject(error);
   }
 }

@@ -7,11 +7,11 @@ var Member = require('./member.model');
 exports.index = function(req, res) {
   Member
   .find({'_organization':req.organization._id})
-  .populate('_user','email firstName lastName')
-  .exec(function (err, members) {
-    if(err) { return handleError(res, err); }
-    return res.status(200).json(members);
-  });
+    .populate('_user','email firstName lastName verifiedEmail')
+    .exec(function (err, members) {
+      if(err) { return handleError(res, err); }
+      return res.status(200).json(members);
+    });
 };
 
 // Get a single member

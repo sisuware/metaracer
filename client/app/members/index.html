@@ -25,7 +25,7 @@
           <tr ng-repeat="member in members">
             <td>{{member._user.firstName}}</td>
             <td>{{member._user.lastName}}</td>
-            <td>{{member._user.email}}</td>
+            <td>{{member._user.email}} <i ng-cloak ng-show="member._user.verifiedEmail" class="fa fa-check text-success"></i></td>
             <td>{{member.role}}</td>
             <td class="text-right">
               <button class="btn btn-secondary-outline btn-sm" ng-click="member.$delete()"><i class="fa fa-trash-o"></i></button>
