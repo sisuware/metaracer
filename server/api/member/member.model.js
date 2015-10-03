@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var roleStates = {
-  'admin': 'organization',
+  'admin': 'organizations.show',
   'user': 'membership.new',
   'member': 'membership',
   'inactive': 'membership.inactive'

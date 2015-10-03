@@ -1,49 +1,39 @@
-<navbar></navbar>
-<div class="row-fluid clearfix">
-  <sidebar></sidebar>
-  <div class="col-sm-12 col-md-10 col-md-offset-2 main">
-    <div class="row clearfix bg-faded p-t m-b p-b">
-      <div class="col-sm-6">
-        <h5 class="m-a-0"><i class="fa fa-motorcycle"></i> Organizations</h5>
-      </div>
-      <div class="col-sm-6 text-right">
-        <a href="/organizations/new" class="btn btn-primary-outline btn-sm"><i class="fa fa-plus"></i> Organization</a>
-      </div>
-    </div>
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Acronym</th>
-            <th>Subdomain</th>
-            <th>Owner</th>
-            <th>Members</th>
-            <th class="text-right">
-            </th>
-          </tr>
-        </thead>
-        <tbody ng-cloak ng-show="organizations.length">
-          <tr ng-repeat="organization in organizations">
-            <td><a ng-href="/organizations/{{organization._id}}">{{organization.name}}</a></td>
-            <td>{{organization.acronym}}</td>
-            <td><a ng-href="https://{{organization.subdomain}}.metaracer.com" target="_blank">{{organization.subdomain}}</a></td>
-            <td>{{organization._owner.email}}</td>
-            <td></td>
-            <td class="text-right">
-              <button class="btn btn-secondary-outline btn-sm" ng-click="organization.$delete()"><i class="fa fa-trash-o"></i></button>
-              <a class="btn btn-primary-outline btn-sm" ng-href="/organizations/{{organization._id}}"><i class="fa fa-pencil"></i></button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody ng-cloak ng-hide="organizations.length">
-          <tr>
-            <td colspan="6">
-              <p class="help-block">You do not belong to any organizations. <a href="/organizations/new">Create a Organization</a></p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<div class="container-fluid bg-faded p-a b-b border-white bg-lighter">
+  <span class="lead text-muted"><i class="fa fa-motorcycle"></i> Organizations</span>
+  <a href="/organizations/new" class="btn btn-secondary-outline btn-sm pull-right"><i class="fa fa-plus"></i> Organization</a>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Acronym</th>
+        <th>Subdomain</th>
+        <th>Owner</th>
+        <th>Members</th>
+        <th class="text-right">
+        </th>
+      </tr>
+    </thead>
+    <tbody ng-cloak ng-show="organizations.length">
+      <tr ng-repeat="organization in organizations">
+        <td><a ng-href="/organizations/{{organization._id}}">{{organization.name}}</a></td>
+        <td>{{organization.acronym}}</td>
+        <td><a ng-href="https://{{organization.subdomain}}.metaracer.com" target="_blank">{{organization.subdomain}}</a></td>
+        <td>{{organization._owner.email}}</td>
+        <td></td>
+        <td class="text-right">
+          <button class="btn btn-secondary-outline btn-sm" ng-click="organization.$delete()"><i class="fa fa-trash-o"></i></button>
+          <a class="btn btn-primary-outline btn-sm" ng-href="/organizations/{{organization._id}}"><i class="fa fa-pencil"></i></button>
+        </td>
+      </tr>
+    </tbody>
+    <tbody ng-cloak ng-hide="organizations.length">
+      <tr>
+        <td colspan="6">
+          <p class="help-block">You do not belong to any organizations. <a href="/organizations/new">Create a Organization</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

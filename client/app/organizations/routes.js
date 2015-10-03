@@ -32,12 +32,17 @@
     $stateProvider
       .state('organizations', {
         url: '/organizations',
+        templateUrl: 'app/organizations/layout.html',
+        abstract: true
+      })
+      .state('organizations.index', {
+        url: '',
         templateUrl: 'app/organizations/index.html',
         controller: 'OrganizationsIndexController',
         authenticate: true
       })
-      .state('newOrganization', {
-        url: '/organizations/new',
+      .state('organizations.new', {
+        url: '/new',
         templateUrl: 'app/organizations/new.html',
         controller: 'OrganizationsNewController',
         authenticate: true,
@@ -46,8 +51,8 @@
           user: userResolve
         }
       })
-      .state('organization', {
-        url: '/organizations/:id',
+      .state('organizations.show', {
+        url: '/:id',
         templateUrl: 'app/organizations/show.html',
         controller: 'OrganizationsShowController',
         authenticate: true,

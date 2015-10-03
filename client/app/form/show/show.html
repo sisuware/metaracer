@@ -1,12 +1,12 @@
-<div class="row clearfix bg-faded-b">
-  <div class="row-fluid clearfix bg-info p-t m-b p-b">
+<div class="container-fluid bg-faded p-a b-b border-white bg-lighter">
+  <div class="row">
     <div class="col-sm-6">
-      <h5 class="m-a-0 text-thin">Preview: <i>{{form.title}}</i></h5>
+      <span class="lead text-muted">Preview Form: <i>{{form.title}}</i></span>
     </div>
     <div class="col-sm-6 text-right">
       <a ui-sref="forms.delete({'form_id':form._id})" class="btn btn-secondary-outline btn-sm">Delete</a>
-      <a ui-sref="forms.edit({'form_id':form._id})" class="btn btn-secondary btn-sm">Edit</a>
+      <a ui-sref="forms.edit({'form_id':form._id})" class="btn btn-primary-outline btn-sm">Edit</a>
     </div>
   </div>
-  <div class="col-sm-12 p-t p-b" form-preview></div>
 </div>
+<div class="col-sm-12 p-t p-b" form-preview></div>

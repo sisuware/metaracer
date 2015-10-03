@@ -1,15 +1,6 @@
-<navbar></navbar>
-<div class="row-fluid clearfix">
-  <sidebar menu="organization"></sidebar>
-  <div class="col-sm-12 col-md-10 col-md-offset-2 main">
-    <div class="row clearfix bg-faded p-t m-b p-b">
-      <div class="col-sm-4">
-        <h5 class="m-a-0">{{organization.acronym}}</h5>
-      </div>
-      <div class="col-sm-4 text-right">
-        <!-- <a href="/organizations/new" class="btn btn-primary-outline btn-sm"><i class="fa fa-plus"></i> Organization</a> -->
-      </div>
-    </div>
-    {{organization}}
-  </div>
+<div class="container-fluid bg-faded p-a b-b border-white bg-lighter">
+  <span class="lead text-muted">{{organization.acronym}}</span>
+  <!-- <button class="btn btn-secondary-outline btn-sm pull-right">Click Me</button> -->
 </div>
+
+{{organization}}

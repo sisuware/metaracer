@@ -1,41 +1,35 @@
-<navbar></navbar>
-<div class="row-fluid clearfix">
-<!--   <sidebar></sidebar> -->
-  <div class="col-sm-12">
-    <div class="row clearfix bg-primary p-t m-b p-b">
-      <div class="col-sm-4">
-        <h5 class="m-a-0">Create an organization</h5>
+<div class="container-fluid p-a b-b border-white bg-inverse">
+  <div class="col-sm-4">
+    <span class="lead">New Organization</span>
+  </div>
+  <div class="col-sm-4 text-center">
+    <i class="fa fa-circle"></i>
+    <i class="fa fa-circle-o"></i>
+  </div>
+  <div class="col-sm-4 text-right">
+    <!-- <a href="/organizations/new" class="btn btn-primary-outline btn-sm"><i class="fa fa-plus"></i> Organization</a> -->
+  </div>
+</div>
+<div class="row-fluid m-t-lg">
+  <div class="col-sm-6 col-sm-offset-3">
+    <h4 class="text-center m-b-lg">Organization Information</h4>
+    <form class="form" name="form" ng-submit="create(form)" novalidate>
+      <div class="form-group" ng-class="{'has-success':form.name.$valid,'has-error':form.name.$invalid && submitted}">
+        <input class="form-control" type="text" name="name" ng-model="organization.name" mongoose-error required placeholder="Organization Full Name">
+        <p class="help-block m-b-0">The full name of your licensed organization.</p>
+        <p ng-cloak class="help-block" ng-show="form.name.$error.required && submitted">A name is required</p>
       </div>
-      <div class="col-sm-4 text-center">
-        <i class="fa fa-circle"></i>
-        <i class="fa fa-circle-o"></i>
+      <div class="form-group" ng-class="{'has-success':form.acronym.$valid,'has-error':form.acronym.$invalid && submitted}">
+        <input class="form-control" type="text" name="acronym" ng-model="organization.acronym" mongoose-error required placeholder="Organization Acronym">
+        <p class="help-block" ng-show="organization.acronym">Your organization will live at http://{{organization.acronym|lowercase}}.metaracer.com</p>
+        <p class="help-block" ng-show="form.acronym.$error.required && submitted">A acronym is required</p>
       </div>
-      <div class="col-sm-4 text-right">
-        <!-- <a href="/organizations/new" class="btn btn-primary-outline btn-sm"><i class="fa fa-plus"></i> Organization</a> -->
-      </div>
-    </div>
-    <div class="row-fluid m-t-lg">
-      <div class="col-sm-6 col-sm-offset-3">
-        <h4 class="text-center m-b-lg">Setup the organization</h4>
-        <form class="form" name="form" ng-submit="create(form)" novalidate>
-          <div class="form-group" ng-class="{'has-success':form.name.$valid,'has-error':form.name.$invalid && submitted}">
-            <input class="form-control" type="text" name="name" ng-model="organization.name" mongoose-error required placeholder="Organization Full Name">
-            <p class="help-block m-b-0">The full name of your licensed organization.</p>
-            <p ng-cloak class="help-block" ng-show="form.name.$error.required && submitted">A name is required</p>
-          </div>
-          <div class="form-group" ng-class="{'has-success':form.acronym.$valid,'has-error':form.acronym.$invalid && submitted}">
-            <input class="form-control" type="text" name="acronym" ng-model="organization.acronym" mongoose-error required placeholder="Organization Acronym">
-            <p class="help-block" ng-show="organization.acronym">Your organization will live at http://{{organization.acronym|lowercase}}.metaracer.com</p>
-            <p class="help-block" ng-show="form.acronym.$error.required && submitted">A acronym is required</p>
-          </div>
-          <div class="row">
-            <div class="col-sm-6"></div>
-            <div class="col-sm-6 text-right">
-              <button class="btn btn-primary" type="submit">Create Organization</button>
-            </div>
-          </div>
+      <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <button class="btn btn-primary" type="submit">Create Organization</button>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>

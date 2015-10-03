@@ -1,18 +1,14 @@
-<div class="row clearfix bg-faded p-t m-b p-b">
-  <div class="col-sm-6">
-    <h5 class="m-a-0">{{organization.acronym}} Seasons</h5>
-  </div>
-  <div class="col-sm-6 text-right">
-    <a ui-sref="seasons.new" class="btn btn-primary-outline btn-sm"><i class="fa fa-plus"></i> Season</a>
-  </div>
+<div class="container-fluid bg-faded p-a b-b border-white bg-lighter">
+  <span class="lead text-muted">{{organization.acronym}} Seasons</span>
+  <a ui-sref="seasons.new" class="btn btn-primary-outline btn-sm pull-right"><i class="fa fa-plus"></i> Season</a>
 </div>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
         <th>Year</th>
-        <th>License Renewal</th>
-        <th>Valid License</th>
+        <th>License Renewal Period</th>
+        <th>Valid License Period</th>
         <th class="text-right"></th>
       </tr>
     </thead>

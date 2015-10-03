@@ -27,6 +27,7 @@
     "nodemailer-ses-transport": "^1.3.0",
     "passport": "~0.2.0",
     "passport-google-oauth": "latest",
+    "passport-hmac": "^1.0.3",
     "passport-local": "~0.1.6",
     "serve-favicon": "~2.0.1",
     "socket.io": "^1.0.6",

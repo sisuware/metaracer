@@ -1,31 +1,23 @@
-<div class="row clearfix bg-faded-b">
-  <div class="row-fluid clearfix bg-primary p-t m-b p-b">
-    <div class="col-sm-6">
-      <h5 class="m-a-0 text-thin">New Form</h5>
+<div class="container-fluid  p-a b-b border-white bg-inverse">
+  <span class="lead">New Form</span>
+  <button class="btn btn-secondary-outline btn-sm pull-right" ng-click="save()">Save</button>
+</div>
+<div class="col-sm-12 m-t">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a href="#" class="nav-link" ui-sref="forms.new.info" ui-sref-active="active">Info</a>
+    </li>
+    <li class="nav-item" ng-repeat="section in form.fields">
+      <a class="nav-link" ui-sref="forms.new.fields({'section': $index})" ui-sref-active="active">{{section.name}}</a>
+    </li>
+  </ul>
+  <ui-view></ui-view>
+  <div class="row clearfix m-t">
+    <div class="col-sm-10">
+      <a ui-sref="forms.list">Cancel</a>      
     </div>
-    <div class="col-sm-6 text-right">
-      <a ng-click="save()" class="btn btn-secondary-outline btn-sm">Save</a>
-    </div>
-  </div>
-  <div class="row-fluid clearfix m-b-lg">
-    <div class="col-sm-12">
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a href="#" class="nav-link" ui-sref="forms.new.info" ui-sref-active="active">Info</a>
-        </li>
-        <li class="nav-item" ng-repeat="section in form.fields">
-          <a class="nav-link" ui-sref="forms.new.fields({'section': $index})" ui-sref-active="active">{{section.name}}</a>
-        </li>
-      </ul>
-      <div class="bg-white tab-content p-t-md" ui-view></div>
-      <div class="row clearfix m-t">
-        <div class="col-sm-10">
-          
-        </div>
-        <div class="col-sm-2 text-right">
-          <button type="submit" class="btn btn-block btn-primary-outline" ng-class="{ disabled: form.$invalid }" ng-click="save()">Save</button>
-        </div>
-      </div>
+    <div class="col-sm-2 text-right">
+      <button type="submit" class="btn btn-block btn-primary-outline" ng-class="{ disabled: form.$invalid }" ng-click="save()">Save</button>
     </div>
   </div>
 </div>

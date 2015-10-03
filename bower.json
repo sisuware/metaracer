@@ -14,6 +14,7 @@
     "angular-socket-io": "~0.6.0",
     "angular-ui-router": "~0.2.15",
     "angular-form-gen": "git@github.com:sisuware/angular-form-gen.git#topic/bootstrap-v4-alpha",
+    "b4dashboard": "git@github.com:simook/b4dashboard.git#master",
     "lato": "~0.3.0"
   },
   "devDependencies": {

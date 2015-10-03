@@ -1,31 +1,31 @@
-<div class="row clearfix bg-faded-b">
-  <div class="row-fluid clearfix bg-primary p-t m-b p-b">
+<div class="container-fluid bg-faded p-a b-b border-white bg-lighter">
+  <div class="row">
     <div class="col-sm-6">
-      <h5 class="m-a-0 text-thin">Editing: <i>{{form.title}}</i></h5>
+      <span class="lead text-muted">Edit Form: <i>{{form.title}}</i></span>
     </div>
     <div class="col-sm-6 text-right">
       <a ui-sref="forms.delete({'form_id':form._id})" class="btn btn-secondary-outline btn-sm">Delete</a>
-      <a ui-sref="forms.show({'form_id':form._id})" class="btn btn-secondary btn-sm">Preview</a>
+      <a ui-sref="forms.show({'form_id':form._id})" class="btn btn-primary-outline btn-sm">Preview</a>
     </div>
   </div>
-  <div class="row-fluid clearfix m-b-lg">
-    <div class="col-sm-12">
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a href="#" class="nav-link" ui-sref="forms.edit.info" ui-sref-active="active">Info</a>
-        </li>
-        <li class="nav-item" ng-repeat="section in form.fields">
-          <a class="nav-link" ui-sref="forms.edit.fields({'section': $index})" ui-sref-active="active">{{section.name}}</a>
-        </li>
-      </ul>
-      <div class="bg-white tab-content p-t-md" ui-view></div>
-      <div class="row clearfix m-t">
-        <div class="col-sm-10">
-          <a ui-sref="forms.list">Cancel</a>
-        </div>
-        <div class="col-sm-2 text-right">
-          <button type="submit" class="btn btn-block btn-primary-outline" ng-class="{ disabled: form.$invalid }" ng-click="update()">Update</button>
-        </div>
+</div>
+<div class="row-fluid clearfix m-b-lg m-t">
+  <div class="col-sm-12">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a href="#" class="nav-link" ui-sref="forms.edit.info" ui-sref-active="active">Info</a>
+      </li>
+      <li class="nav-item" ng-repeat="section in form.fields">
+        <a class="nav-link" ui-sref="forms.edit.fields({'section': $index})" ui-sref-active="active">{{section.name}}</a>
+      </li>
+    </ul>
+    <div class="bg-white tab-content p-t-md" ui-view></div>
+    <div class="row clearfix m-t">
+      <div class="col-sm-10">
+        <a ui-sref="forms.list">Cancel</a>
+      </div>
+      <div class="col-sm-2 text-right">
+        <button type="submit" class="btn btn-block btn-primary-outline" ng-class="{ disabled: form.$invalid }" ng-click="update()">Update</button>
       </div>
     </div>
   </div>
