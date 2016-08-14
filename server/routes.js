@@ -20,6 +20,7 @@ module.exports = function(app) {
   app.use('/api/organizations', require('./api/organization'));
   app.use('/api/forms', require('./api/form'));
   app.use('/api/users', require('./api/user'));
+  app.use('/api/banks', require('./api/bank'));
 
   app.use('/auth', require('./auth'));
   

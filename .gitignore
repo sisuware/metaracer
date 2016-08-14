@@ -8,3 +8,4 @@ dist
 *.pem
 *.crt
 npm-debug.log
+.DS_Store

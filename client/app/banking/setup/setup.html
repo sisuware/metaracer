@@ -1,0 +1,66 @@
+<div class="container-fluid p-a b-b border-white bg-inverse">
+  <div class="row">
+    <div class="col-sm-4">
+      <span class="lead">Banking</span>
+    </div>
+    <div class="col-sm-4 text-center">
+      <i class="fa fa-circle"></i>
+      <i class="fa fa-circle-o"></i>
+      <i class="fa fa-circle-o"></i>
+    </div>  
+  </div>
+</div>
+<div class="col-sm-6 col-sm-offset-3 m-t-lg">
+  <h4 class="text-center m-b-lg">Bank Info</h4>
+  <p class="lead">This can be the bank, account, or any unqiue name to help identify your account.</p>
+  <form novalidate name="bankingForm">
+    <div class="form-group" ng-class="{'has-success':bankingForm.label.$valid,'has-error':bankingForm.label.$invalid && submitted}">
+      <input type="text" name="label" ng-model="banking.label" mongoose-error required class="form-control" placeholder="Bank name">
+      <p ng-cloak class="help-block" ng-show="bankingForm.label.$error.required && submitted">A bank name is required.</p>
+    </div>
+    <div class="form-group" ng-class="{'has-success':bankingForm.country.$valid,'has-error':bankingForm.country.$invalid && submitted}">
+      <select class="form-control" name="country" ng-model="banking.country" mongoose-error required ng-options="key as value for (key,value) in countries">
+      </select>
+      <p ng-cloak class="help-block" ng-show="bankingForm.country.$error.required && submitted">A country is required.</p>
+    </div>
+    
+    <hr/>
+    
+    <div class="row form-group" ng-class="{'has-success':bankingForm.label.$valid,'has-error':bankingForm.label.$invalid && submitted}">
+      <div class="col-sm-12">
+        <label>First & Last Name</label>
+      </div>
+      <div class="col-sm-6">
+        <input type="text" name="label" ng-model="banking.legal_entity.first_name" mongoose-error required class="form-control form-control-sm" placeholder="First Name">
+      </div>
+      <div class="col-sm-6">
+        <input type="text" name="label" ng-model="banking.legal_entity.last_name" mongoose-error required class="form-control form-control-sm" placeholder="Last Name">
+      </div>
+    </div>
+
+    <div class="row form-group" ng-class="{'has-success':bankingForm.label.$valid,'has-error':bankingForm.label.$invalid && submitted}">
+      <div class="col-sm-12">
+        <label>Date of birth</label>
+      </div>      
+      <div class="col-sm-4">
+        <input type="text" name="label" ng-model="banking.legal_entity.dob.day" mongoose-error required class="form-control form-control-sm" placeholder="dd">
+      </div>
+      <div class="col-sm-4">
+        <input type="text" name="label" ng-model="banking.legal_entity.dob.month" mongoose-error required class="form-control form-control-sm" placeholder="mm">
+      </div>
+      <div class="col-sm-4">
+        <input type="text" name="label" ng-model="banking.legal_entity.dob.year" mongoose-error required class="form-control form-control-sm" placeholder="yyyy">
+      </div>
+      <!-- <p ng-cloak class="help-block" ng-show="bankingForm.label.$error.required && submitted">A bank name is required.</p> -->
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <a ui-sref="banking.index">Cancel</a>
+      </div>
+      <div class="col-sm-6 text-right">
+        <button ng-click="next('banking.setup.identity', bankingForm)" class="btn btn-primary" type="submit" ng-disabled="bankingForm.$invalid">Next</button>
+      </div>
+    </div>
+  </form>
+</div>

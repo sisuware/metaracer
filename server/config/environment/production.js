@@ -19,5 +19,10 @@ module.exports = {
             process.env.MONGOHQ_URL ||
             process.env.OPENSHIFT_MONGODB_DB_URL+process.env.OPENSHIFT_APP_NAME ||
             'mongodb://localhost/metaracer'
+  },
+
+  stripe: {
+    secretKey: 'sk_live_JITkMFapRLzZgDfKQpcZlNIE',
+    publishableKey: 'pk_live_IGk2ZGGf0w5noXyC3UkhOnuT'
   }
 };

@@ -1,0 +1,30 @@
+<div class="container-fluid p-a b-b border-white bg-inverse">
+  <div class="row">
+    <div class="col-sm-4">
+      <span class="lead">Banking</span>
+    </div>
+    <div class="col-sm-4 text-center">
+      <i class="fa fa-circle-o"></i>
+      <i class="fa fa-circle-o"></i>
+      <i class="fa fa-circle"></i>
+    </div>  
+  </div>
+</div>
+<div class="col-sm-6 col-sm-offset-3 m-t-lg">
+  <h4 class="text-center m-b-lg">Identity</h4>
+  <p class="lead">This can be the bank, account, or any unqiue name to help identify your account.</p>
+  <form novalidate name="bankingForm">
+    <div class="form-group" ng-class="{'has-success':bankingForm.label.$valid,'has-error':bankingForm.label.$invalid && submitted}">
+      <input type="text" name="label" ng-model="banking.label" mongoose-error required class="form-control" placeholder="Bank name">
+      <p ng-cloak class="help-block" ng-show="bankingForm.label.$error.required && submitted">A bank name is required.</p>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <a ui-sref="banking.index">Cancel</a>
+      </div>
+      <div class="col-sm-6 text-right">
+        <button ng-click="next('banking.setup.country', bankingForm)" class="btn btn-primary" type="submit" ng-disabled="bankingForm.$invalid">Next</button>
+      </div>
+    </div>
+  </form>
+</div>

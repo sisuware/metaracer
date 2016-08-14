@@ -13,6 +13,7 @@
         {'title': 'Forms', 'param': 'organizations', 'go':'forms.list' },
         {'title': 'Members', 'param': 'organizations', 'go':'members' },
         {'title': 'Seasons', 'param': 'organizations', 'go':'seasons.list' },
+        {'title': 'Banking', 'param': 'organizations', 'go':'banking.index' }
       ],
       'settings': [
         {'title': 'Account', 'link': 'settings', 'go':'settings'},

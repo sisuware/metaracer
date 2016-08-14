@@ -41,6 +41,7 @@ require('./config/socketio')(socketio);
 require('./config/express')(app);
 require('./routes')(app);
 require('./config/sqs')();
+require('./config/stripe')();
 
 app.use(helmet.hsts(config.helmet));
 

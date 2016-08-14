@@ -95,6 +95,10 @@ var all = {
         QueueName: 'metaracer-dev'
       }
     }
+  },
+
+  stripe: {
+    uri: 'https://api.stripe.com'
   }
 };
 
